@@ -79,7 +79,7 @@ function Bar() {
       icon: <FaImages className="inline-block mr-2 text-white" />,
       key: "gallery",
       dropdown: [
-        { label: "Photos", path: "/photos" },
+        { label: "Photos", path: "gallery/photos" },
         { label: "Videos", path: "/gallery/videos" },
       ],
     },

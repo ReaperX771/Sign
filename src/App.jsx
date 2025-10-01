@@ -12,7 +12,7 @@ function App() {
        <Bar/>
        <Routes>
 
-          <Route path="/photos" element={<Gallery/>} />
+          <Route path="gallery/photos" element={<Gallery/>} />
           <Route
            path="/"
            element={ <>
