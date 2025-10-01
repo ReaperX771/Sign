@@ -25,10 +25,11 @@ function App() {
             <Colla/>
             <Cola/>
             <Que/>
-            <Footer/>
+            
            </>}
           />
        </Routes>
+       <Footer/>
      </Router>
     </>
   )
