@@ -22,9 +22,7 @@ function Bar() {
     gallery: false,
   });
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const toggleDropdown = (menu) => {
     setDropdownOpen((prev) => ({
@@ -79,7 +77,7 @@ function Bar() {
       icon: <FaImages className="inline-block mr-2 text-white" />,
       key: "gallery",
       dropdown: [
-        { label: "Photos", path: "gallery/photos" },
+        { label: "Photos", path: "/gallery/photos" },
         { label: "Videos", path: "/gallery/videos" },
       ],
     },
@@ -88,18 +86,18 @@ function Bar() {
   return (
     <section>
       <div>
-        <div className="flex justify-between items-center px-4 sm:px-6 lg:px-20 py-6 bg-gradient-to-b from-[#fc9200] to-[#f72800] fixed top-0 left-0 right-0 shadow z-50 backdrop-blur-3xl">
+        <div className="flex justify-between items-center px-4 sm:px-6 lg:px-20 py-6 bg-gradient-to-b from-[#fc9200] to-[#f72800] fixed top-0 left-0 right-0 shadow z-50">
+          {/* Logo */}
           <Link to="/" className="cursor-pointer">
             <img src={logo} alt="Orange Dynasty Logo" className="h-10" />
           </Link>
 
-          {/* Hamburger Icon for Mobile */}
+          {/* Hamburger */}
           <div className="lg:hidden flex items-center">
             <button
               onClick={toggleMenu}
               aria-label="Toggle menu"
               className="focus:outline-none p-2 rounded-md bg-white/10 hover:bg-white/20 transition-all"
-              style={{ zIndex: 100 }}
             >
               {isMenuOpen ? (
                 <FaTimes className="text-white text-2xl" />
@@ -109,74 +107,58 @@ function Bar() {
             </button>
           </div>
 
-          {/* Navigation Menu */}
+          {/* Navigation */}
           <nav
             className={`${
-              isMenuOpen && !isLgScreen() ? "flex" : "hidden lg:flex"
-            } flex-col lg:flex-row gap-4 lg:gap-10 text-white text-lg font-medium absolute lg:static top-16 left-0 right-0 lg:bg-transparent p-4 lg:p-0 h-[calc(100vh-4rem)] lg:h-auto ${
-              isMenuOpen && !isLgScreen() ? "bg-gradient-to-b from-[#AC2B06] to-[#9E2305]" : ""
-            }`}
-            style={{
-              maxWidth: isMenuOpen && !isLgScreen() ? '100vw' : undefined,
-              width: isMenuOpen && !isLgScreen() ? '100vw' : undefined,
-              left: isMenuOpen && !isLgScreen() ? 0 : undefined,
-              right: isMenuOpen && !isLgScreen() ? 0 : undefined,
-              top: isMenuOpen && !isLgScreen() ? '4rem' : undefined,
-            }}
+              isMenuOpen
+                ? "fixed inset-0 bg-gradient-to-b from-[#AC2B06] to-[#9E2305] flex flex-col items-center justify-start pt-24 gap-6"
+                : "hidden"
+            } lg:flex lg:static lg:flex-row lg:gap-10 lg:bg-transparent lg:pt-0 lg:items-center lg:justify-end`}
           >
             {navItems.map((item) => (
-              <div key={item.key} className="relative">
+              <div key={item.key} className="relative text-center lg:text-left">
                 <button
                   onClick={() => toggleDropdown(item.key)}
-                  className="flex items-center hover:text-orange-300 transition-colors duration-200"
+                  className="flex items-center justify-center lg:justify-start hover:text-orange-300 transition-colors duration-200 w-full"
                 >
                   {item.icon}
-                  <span className="no-underline text-white">
-                    {item.name}
-                  </span>
+                  <span className="no-underline text-white">{item.name}</span>
                   <FaChevronDown
                     className={`ml-2 transform transition-transform duration-200 ${
                       dropdownOpen[item.key] ? "rotate-180" : ""
                     }`}
                   />
                 </button>
-                {/* Dropdown Menu */}
+
+                {/* Dropdown */}
                 <div
                   className={`${
                     dropdownOpen[item.key] ? "block" : "hidden"
-                  } lg:absolute lg:bg-gray-900 lg:shadow-lg lg:rounded-md mt-2 w-48 transition-all duration-200`}
+                  } lg:absolute lg:bg-gray-900 lg:shadow-lg lg:rounded-md mt-2 w-48`}
                 >
-                  {item.dropdown.map((subItem) => (
+                  {item.dropdown.map((subItem) =>
                     item.key === "gallery" ? (
-                      <a
+                      <Link
                         key={subItem.label}
-                        href={subItem.path}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block px-4 py-2 text-white hover:bg-orange-600 hover:text-white transition-colors duration-200"
-                        onClick={() => {
-                          setIsMenuOpen(false); // Close mobile menu on click
-                          setDropdownOpen({ ...dropdownOpen, [item.key]: false }); // Close dropdown
-                        }}
+                        to={subItem.path}
+                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
                       >
                         {subItem.label}
-                      </a>
+                      </Link>
                     ) : (
                       <a
                         key={subItem.label}
                         href={subItem.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block px-4 py-2 text-white hover:bg-orange-600 hover:text-white transition-colors duration-200"
-                        onClick={() => {
-                          setIsMenuOpen(false);
-                          setDropdownOpen({ ...dropdownOpen, [item.key]: false });
-                        }}
+                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
                       >
                         {subItem.label}
                       </a>
                     )
-                  ))}
+                  )}
                 </div>
               </div>
             ))}
@@ -185,11 +167,6 @@ function Bar() {
       </div>
     </section>
   );
-}
-
-// Helper function to check if screen is lg or larger
-function isLgScreen() {
-  return window.innerWidth >= 1024; // lg breakpoint in Tailwind
 }
 
 export default Bar;
