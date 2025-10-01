@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { Link } from "react-router-dom";
-import { 
-  FaInfoCircle, 
-  FaUsers, 
-  FaCoins, 
-  FaBook, 
-  FaImages, 
-  FaChevronDown, 
-  FaBars, 
-  FaTimes 
+import {
+  FaInfoCircle,
+  FaUsers,
+  FaCoins,
+  FaBook,
+  FaImages,
+  FaChevronDown,
+  FaBars,
+  FaTimes,
 } from "react-icons/fa";
 
 function Bar() {
@@ -94,8 +94,13 @@ function Bar() {
           </Link>
 
           {/* Hamburger Icon for Mobile */}
-          <div className="lg:hidden">
-            <button onClick={toggleMenu} aria-label="Toggle menu">
+          <div className="lg:hidden flex items-center">
+            <button
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+              className="focus:outline-none p-2 rounded-md bg-white/10 hover:bg-white/20 transition-all"
+              style={{ zIndex: 100 }}
+            >
               {isMenuOpen ? (
                 <FaTimes className="text-white text-2xl" />
               ) : (
@@ -108,7 +113,16 @@ function Bar() {
           <nav
             className={`${
               isMenuOpen && !isLgScreen() ? "flex" : "hidden lg:flex"
-            } flex-col lg:flex-row gap-4 lg:gap-10 text-white text-lg font-medium absolute lg:static top-16 left-0 right-0 lg:bg-transparent p-4 lg:p-0 h-[calc(100vh-4rem)] lg:h-auto ${isMenuOpen && !isLgScreen() ? "bg-gradient-to-b from-[#AC2B06] to-[#9E2305]" : ""}`}
+            } flex-col lg:flex-row gap-4 lg:gap-10 text-white text-lg font-medium absolute lg:static top-16 left-0 right-0 lg:bg-transparent p-4 lg:p-0 h-[calc(100vh-4rem)] lg:h-auto ${
+              isMenuOpen && !isLgScreen() ? "bg-gradient-to-b from-[#AC2B06] to-[#9E2305]" : ""
+            }`}
+            style={{
+              maxWidth: isMenuOpen && !isLgScreen() ? '100vw' : undefined,
+              width: isMenuOpen && !isLgScreen() ? '100vw' : undefined,
+              left: isMenuOpen && !isLgScreen() ? 0 : undefined,
+              right: isMenuOpen && !isLgScreen() ? 0 : undefined,
+              top: isMenuOpen && !isLgScreen() ? '4rem' : undefined,
+            }}
           >
             {navItems.map((item) => (
               <div key={item.key} className="relative">
