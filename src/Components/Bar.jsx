@@ -111,7 +111,7 @@ function Bar() {
           <nav
             className={`
               ${isMenuOpen
-                ? "fixed inset-0 bg-gradient-to-b from-[#AC2B06] to-[#9E2305] flex flex-col items-start justify-start pt-24 gap-6 pl-6 z-40"
+                ? "fixed inset-0 bg-gradient-to-b from-[#f72800] to-[#fc9200] flex flex-col items-start justify-start pt-24 gap-6 pl-6 z-40"
                 : "hidden"}
               lg:flex lg:static lg:flex-row lg:gap-10 lg:bg-transparent lg:pt-0 lg:items-center lg:justify-start
             `}

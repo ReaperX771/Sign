@@ -30,7 +30,7 @@ function Hero() {
           {/* Placeholder for center space on xl */}
           <div className='hidden xl:block w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg flex justify-center min-h-48'></div>
         </div>
-        <div className='text-center flex flex-col sm:flex-row items-center justify-center gap-4 w-full'>
+        <div className='text-center flex flex-col sm:flex-row items-center justify-center gap-4 w-[80%] mx-auto pb-3'>
           <a
             href="/pdfs/whitepaper.pdf"
             target="_blank"
