@@ -88,12 +88,12 @@ function Bar() {
       <div>
         <div className="flex justify-between items-center px-4 sm:px-6 lg:px-20 py-6 bg-gradient-to-b from-[#fc9200] to-[#f72800] fixed top-0 left-0 right-0 shadow z-50">
           {/* Logo */}
-          <Link to="/" className="cursor-pointer">
+          <Link to="/" className="cursor-pointer z-50">
             <img src={logo} alt="Orange Dynasty Logo" className="h-10" />
           </Link>
 
           {/* Hamburger */}
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center z-50">
             <button
               onClick={toggleMenu}
               aria-label="Toggle menu"
@@ -109,32 +109,32 @@ function Bar() {
 
           {/* Navigation */}
           <nav
-            className={`${
-              isMenuOpen
-                ? "fixed inset-0 bg-gradient-to-b from-[#AC2B06] to-[#9E2305] flex flex-col items-center justify-start pt-24 gap-6"
-                : "hidden"
-            } lg:flex lg:static lg:flex-row lg:gap-10 lg:bg-transparent lg:pt-0 lg:items-center lg:justify-end`}
+            className={`
+              ${isMenuOpen
+                ? "fixed inset-0 bg-gradient-to-b from-[#AC2B06] to-[#9E2305] flex flex-col items-start justify-start pt-24 gap-6 pl-6 z-40"
+                : "hidden"}
+              lg:flex lg:static lg:flex-row lg:gap-10 lg:bg-transparent lg:pt-0 lg:items-center lg:justify-start
+            `}
           >
             {navItems.map((item) => (
-              <div key={item.key} className="relative text-center lg:text-left">
+              <div key={item.key} className="relative text-left">
                 <button
                   onClick={() => toggleDropdown(item.key)}
-                  className="flex items-center justify-center lg:justify-start hover:text-orange-300 transition-colors duration-200 w-full"
+                  className="flex items-center justify-start hover:text-orange-300 transition-colors duration-200 w-full group"
                 >
                   {item.icon}
                   <span className="no-underline text-white">{item.name}</span>
                   <FaChevronDown
-                    className={`ml-2 transform transition-transform duration-200 ${
-                      dropdownOpen[item.key] ? "rotate-180" : ""
-                    }`}
+                    className={`ml-2 text-white transition-transform duration-200 group-hover:text-yellow-300 ${dropdownOpen[item.key] ? "rotate-180 text-yellow-300" : ""}`}
                   />
                 </button>
 
                 {/* Dropdown */}
                 <div
-                  className={`${
-                    dropdownOpen[item.key] ? "block" : "hidden"
-                  } lg:absolute lg:bg-gray-900 lg:shadow-lg lg:rounded-md mt-2 w-48`}
+                  className={`
+                    ${dropdownOpen[item.key] ? "block" : "hidden"}
+                    lg:absolute lg:bg-gray-900 lg:shadow-lg lg:rounded-md mt-2 w-48
+                  `}
                 >
                   {item.dropdown.map((subItem) =>
                     item.key === "gallery" ? (
