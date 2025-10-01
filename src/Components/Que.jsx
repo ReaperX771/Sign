@@ -65,7 +65,7 @@ function Que() {
   };
 
   return (
-    <section id='faq' className="bg-gradient-to-r  from-orange-500 via-orange-600 to-red-600 py-20 px-6 md:px-12 text-white">
+    <section id='faq' className="bg-gradient-to-r  from-orange-500 via-orange-600 to-red-600 py-20 px-6 md:px-12 text-white overflow-x-hidden">
       <div className="max-w-5xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
           Frequently Asked <span className="text-yellow-200">Questions</span>

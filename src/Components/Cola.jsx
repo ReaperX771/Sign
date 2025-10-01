@@ -39,17 +39,17 @@ export default function Cola() {
   return (
     <section
       ref={containerRef}
-      className="py-20 bg-gradient-to-b from-orange-500 to-red-600 text-white text-center"
+      className="py-20 bg-gradient-to-b from-orange-500 to-red-600 text-white text-center overflow-x-hidden"
     >
       <h2 className="text-3xl md:text-4xl font-bold mb-12">Meet the Collaborators</h2>
 
-      <div className="relative flex justify-center flex-wrap gap-10 max-w-5xl mx-auto">
+      <div className="relative flex flex-wrap justify-center gap-6 sm:gap-10 max-w-5xl mx-auto">
         {collaborators.map((c, i) => (
           <div
             key={i}
-            className={`collab-card opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col items-center p-6 rounded-2xl shadow-xl ${c.leader ? "bg-white text-black scale-110 ring-4 ring-yellow-400" : "bg-black/20"}`}
+            className={`collab-card opacity-0 translate-y-10 transition-all duration-700 ease-out flex flex-col items-center p-6 rounded-2xl shadow-xl w-full max-w-xs sm:max-w-sm ${c.leader ? "bg-white text-black scale-105 ring-4 ring-yellow-400" : "bg-black/20"}`}
             style={{
-              transform: `rotate(${i * 10 - 30}deg) translateY(${Math.abs(i - 3) * 15}px)`
+              transform: window.innerWidth < 640 ? undefined : `rotate(${i * 10 - 30}deg) translateY(${Math.abs(i - 3) * 15}px)`
             }}
           >
             <img

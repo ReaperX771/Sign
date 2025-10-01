@@ -48,7 +48,7 @@ function Community() {
   };
 
   return (
-    <section id='community' className="bg-gradient-to-r from-orange-100 via-pink-100 to-purple-100 py-20 px-6 md:px-12">
+    <section id='community' className="bg-gradient-to-r from-orange-100 via-pink-100 to-purple-100 py-20 px-6 md:px-12 overflow-x-hidden">
       <div className="max-w-4xl mx-auto text-center relative">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
           Community <span className="text-orange-600">Showcase</span>
