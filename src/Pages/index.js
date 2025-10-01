@@ -1,3 +1,3 @@
-import Gallery from "./Gallery";
+import Gallery from "../Components/Gallery";
 
 export {Gallery}

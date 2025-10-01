@@ -1,94 +1,10 @@
 import React, { useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaTimes } from "react-icons/fa";
-import img1 from '../assets/gallery/img1.jpg'
-import img2 from '../assets/gallery/img2.jpg'
-import img3 from '../assets/gallery/img3.jpg'
-import img4 from '../assets/gallery/img4.jpg'
-import img5 from '../assets/gallery/img5.jpg'
-import img6 from '../assets/gallery/img6.jpg'
-import img7 from '../assets/gallery/img7.jpg'
-import img8 from '../assets/gallery/img8.jpg'
-import img9 from '../assets/gallery/img9.jpg'
-import img10 from '../assets/gallery/img10.jpg'
-import img11 from '../assets/gallery/img11.jpg'
-import img12 from '../assets/gallery/img12.jpg'
-import img13 from '../assets/gallery/img13.jpg'
-import img14 from '../assets/gallery/img14.jpg'
-import img15 from '../assets/gallery/img15.jpg'
-import img16 from '../assets/gallery/img16.jpg'
-import img17 from '../assets/gallery/img17.jpg'
-import img18 from '../assets/gallery/img18.jpg'
-import img19 from '../assets/gallery/img19.jpg'
-import img20 from '../assets/gallery/img20.jpg'
-import img21 from '../assets/gallery/img21.jpg'
-import img22 from '../assets/gallery/img22.jpg'
-import img23 from '../assets/gallery/img3.jpg'
-import img24 from '../assets/gallery/img4.jpg'
-import img25 from '../assets/gallery/img5.jpg'
-import img26 from '../assets/gallery/img6.jpg'
-import img27 from '../assets/gallery/img7.jpg'
-import img28 from '../assets/gallery/img8.jpg'
-import img29 from '../assets/gallery/img9.jpg'
-import img30 from '../assets/gallery/img10.jpg'
-import img31 from '../assets/gallery/img11.jpg'
-import img32 from '../assets/gallery/img12.jpg'
-import img33 from '../assets/gallery/img13.jpg'
-import img34 from '../assets/gallery/img14.jpg'
-import img35 from '../assets/gallery/img15.jpg'
-import img36 from '../assets/gallery/img16.jpg'
-import img37 from '../assets/gallery/img17.jpg'
-import img38 from '../assets/gallery/img18.jpg'
-import img39 from '../assets/gallery/img19.jpg'
-import img40 from '../assets/gallery/img20.jpg'
-import img41 from '../assets/gallery/img21.jpg'
-import img42 from '../assets/gallery/img22.jpg'
 
-
-// 30 manual placeholders from public folder
-const images = [
-  { src: img1 },
-  { src: img2 },
-  { src: img3 },
-  { src: img4 },
-  { src: img5 },
-  { src: img6 },
-  { src: img7 },
-  { src: img8 },
-  { src: img9 },
-  { src: img10 },
-  { src: img11 },
-  { src: img12 },
-  { src: img13 },
-  { src: img14 },
-  { src: img15 },
-  { src: img16 },
-  { src: img17 },
-  { src: img18 },
-  { src: img19 },
-  { src: img20 },
-  { src: img21 },
-  { src: img22 },
-  { src: img23 },
-  { src: img24 },
-  { src: img25 },
-  { src: img26 },
-  { src: img27 },
-  { src: img28 },
-  { src: img29 },
-  { src: img30 },
-  { src: img31 },
-  { src: img32 },
-  { src: img33 },
-  { src: img34 },
-  { src: img35 },
-  { src: img36 },
-  { src: img37 },
-  { src: img38 },
-  { src: img39 },
-  { src: img40 },
-  { src: img41 },
-  { src: img42 },
-];
+// Use correct URLs for images in public/gallery
+const images = Array.from({ length: 42 }, (_, i) => ({
+  src: `/gallery/img${i + 1}.jpg`,
+}));
 
 function Gallery() {
   const [selected, setSelected] = useState(null);
@@ -127,7 +43,7 @@ function Gallery() {
             >
               <img
                 src={img.src}
-                alt=""
+                alt={img.title}
                 className="w-full h-60 object-cover"
               />
               <div className="p-4 flex justify-center gap-3">
@@ -164,9 +80,10 @@ function Gallery() {
               {/* Image */}
               <img
                 src={selected.src}
-                alt=""
+                alt={selected.title}
                 className="max-h-[65vh] w-auto mx-auto rounded-lg mb-6 object-contain"
-              />{/* Controls */}
+              />
+              {/* Controls */}
               <div className="flex justify-between items-center">
                 <button
                   onClick={prevImage}
