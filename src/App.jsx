@@ -10,7 +10,7 @@ function ScrollToTop() {
 }
 import './App.css'
 import { Bar, Cola, Colla, Community, Cta, Footer, Hero, How, Que, What, Why } from './Components'
-import { Gallery } from "./Pages";
+import { Gallery, Mission } from "./Pages";
 
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
       <Bar/>
       <Routes>
         <Route path="gallery/photos" element={<Gallery/>} />
+        <Route path="community/mission" element={<Mission/>} />
         <Route
           path="/"
           element={ <>

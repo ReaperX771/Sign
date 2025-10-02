@@ -87,8 +87,7 @@ function Bar() {
         { label: "X community", link: "https://x.com/sign" },
         { label: "Telegram", link: "https://t.me/orangedynasty" },
         { label: "Discord", link: "https://discord.gg/skA5fkqVwT" },
-        { label: "Our Mission", link: "https://example.com/mission" },
-        { label: "Team", link: "https://example.com/team" },
+  { label: "Our Mission", path: "/community/mission" },
       ],
     },
     {
@@ -117,7 +116,7 @@ function Bar() {
       key: "gallery",
       dropdown: [
         { label: "Photos", path: "/gallery/photos" },
-        { label: "Videos", path: "/gallery/videos" },
+        // { label: "Videos", path: "/gallery/videos" },
       ],
     },
   ];
@@ -183,7 +182,7 @@ function Bar() {
                       >
                         {subItem.label}
                       </button>
-                    ) : item.key === "gallery" && subItem.path ? (
+                    ) : subItem.path ? (
                       <Link
                         key={subItem.label}
                         to={subItem.path}
