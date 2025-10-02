@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/images/logo.svg";
 import { Link } from "react-router-dom";
 import AnchorLink from "react-anchor-link-smooth-scroll";
@@ -30,6 +30,20 @@ function Bar() {
       ...prev,
       [menu]: !prev[menu],
     }));
+  };
+
+  // prevent background scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isMenuOpen]);
+
+  const handleNavClick = () => {
+    setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const navItems = [
@@ -96,7 +110,7 @@ function Bar() {
       <div>
         <div className="flex justify-between items-center px-4 sm:px-6 lg:px-20 py-6 bg-gradient-to-b from-[#fc9200] to-[#f72800] fixed top-0 left-0 right-0 shadow z-50">
           {/* Logo */}
-          <Link to="/" className="cursor-pointer z-50">
+          <Link to="/" className="cursor-pointer z-50" onClick={handleNavClick}>
             <img src={logo} alt="Orange Dynasty Logo" className="h-10" />
           </Link>
 
@@ -104,8 +118,7 @@ function Bar() {
           <div className="lg:hidden flex items-center z-50">
             <button
               onClick={toggleMenu}
-              aria-label="Toggle menu"
-              className="focus:outline-none p-2 rounded-md bg-white/10 hover:bg-white/20 transition-all"
+              aria-label="Toggle menu"className="focus:outline-none p-2 rounded-md bg-white/10 hover:bg-white/20 transition-all"
             >
               {isMenuOpen ? (
                 <FaTimes className="text-white text-2xl" />
@@ -119,7 +132,7 @@ function Bar() {
           <nav
             className={`
               ${isMenuOpen
-                ? "fixed inset-0 bg-gradient-to-b from-[#f72800] to-[#fc9200] flex flex-col items-start justify-start pt-24 gap-6 pl-6 z-40"
+                ? "fixed inset-0 bg-gradient-to-b from-[#f72800] to-[#fc9200] flex flex-col items-start justify-start pt-24 gap-6 pl-6 z-40 overflow-y-auto"
                 : "hidden"}
               lg:flex lg:static lg:flex-row lg:gap-10 lg:bg-transparent lg:pt-0 lg:items-center lg:justify-start
             `}
@@ -151,7 +164,7 @@ function Bar() {
                         href={subItem.anchor}
                         offset="80"
                         className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors cursor-pointer"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={handleNavClick}
                       >
                         {subItem.label}
                       </AnchorLink>
@@ -160,7 +173,7 @@ function Bar() {
                         key={subItem.label}
                         to={subItem.path}
                         className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={handleNavClick}
                       >
                         {subItem.label}
                       </Link>
