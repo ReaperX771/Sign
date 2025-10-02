@@ -3,7 +3,7 @@ import React from "react";
 function Mission() {
 	return (
 		<section id="mission" className="bg-gradient-to-r from-orange-400 via-orange-500 to-[#f72800] py-10 px-2 sm:py-16 sm:px-4 md:px-8 min-h-[60vh] flex items-center justify-center">
-			<div className="w-full max-w-3xl mx-auto text-center bg-white/90 rounded-2xl shadow-xl p-4 sm:p-8 md:p-10">
+			<div className="w-full max-w-3xl mx-auto text-center bg-white/90 rounded-2xl shadow-xl p-4 sm:p-8 md:p-10 mt-20">
 				<h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-orange-600 mb-4 sm:mb-6 drop-shadow">
 					Our Mission
 				</h2>
