@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/images/logo.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import {
   FaUsers,
@@ -14,6 +14,8 @@ import {
 import { BiSolidNavigation } from "react-icons/bi";
 
 function Bar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState({
     about: false,
@@ -41,9 +43,24 @@ function Bar() {
     }
   }, [isMenuOpen]);
 
-  const handleNavClick = () => {
+  // Handles anchor navigation from any route
+  const handleAnchorNav = (anchor) => {
     setIsMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const scrollWithOffset = (el) => {
+      if (!el) return;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 80; // 80px offset
+      window.scrollTo({ top: y, behavior: "smooth" });
+    };
+    if (location.pathname !== "/") {
+      navigate("/", { replace: false });
+      setTimeout(() => {
+        const el = document.querySelector(anchor);
+        scrollWithOffset(el);
+      }, 300);
+    } else {
+      const el = document.querySelector(anchor);
+      scrollWithOffset(el);
+    }
   };
 
   const navItems = [
@@ -110,9 +127,9 @@ function Bar() {
       <div>
         <div className="flex justify-between items-center px-4 sm:px-6 lg:px-20 py-6 bg-gradient-to-b from-[#fc9200] to-[#f72800] fixed top-0 left-0 right-0 shadow z-50">
           {/* Logo */}
-          <Link to="/" className="cursor-pointer z-50" onClick={handleNavClick}>
+          <button className="cursor-pointer z-50 bg-transparent border-none p-0" onClick={() => handleAnchorNav("#hero") }>
             <img src={logo} alt="Orange Dynasty Logo" className="h-10" />
-          </Link>
+          </button>
 
           {/* Hamburger */}
           <div className="lg:hidden flex items-center z-50">
@@ -159,21 +176,19 @@ function Bar() {
                 >
                   {item.dropdown.map((subItem) =>
                     subItem.anchor ? (
-                      <AnchorLink
+                      <button
                         key={subItem.label}
-                        href={subItem.anchor}
-                        offset="80"
-                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors cursor-pointer"
-                        onClick={handleNavClick}
+                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors cursor-pointer text-left w-full"
+                        onClick={() => handleAnchorNav(subItem.anchor)}
                       >
                         {subItem.label}
-                      </AnchorLink>
+                      </button>
                     ) : item.key === "gallery" && subItem.path ? (
                       <Link
                         key={subItem.label}
                         to={subItem.path}
                         className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors"
-                        onClick={handleNavClick}
+                        onClick={() => setIsMenuOpen(false)}
                       >
                         {subItem.label}
                       </Link>
