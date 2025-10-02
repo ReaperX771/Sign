@@ -8,11 +8,11 @@ function Mission() {
 					Our Mission
 				</h2>
 				<p className="text-lg md:text-xl text-gray-800 leading-relaxed">
-					<span className="font-semibold text-[#f72800]">@sign</span> (Sign Protocol) aims to be the global trust layer for blockchain-based attestations, enabling secure, verifiable signing of anything on-chain.<br className="hidden md:block" />
-					<br />
-					Our mission focuses on bridging the web and physical world through tools like <span className="font-semibold text-orange-500">SignPass</span> and <span className="font-semibold text-orange-500">TokenTable</span>, fostering community-driven innovation in identity, DeFi, and token economies.<br className="hidden md:block" />
-					<br />
-					Supported by leading investors like <span className="font-semibold text-orange-500">Sequoia</span> and <span className="font-semibold text-orange-500">Binance Labs</span>, we empower a new era of trust, collaboration, and opportunity for all.
+					  <span className="font-semibold text-[#f72800]">@sign</span> (Sign Protocol) aims to be the global trust layer for blockchain-based attestations, enabling secure, verifiable signing of anything on-chain.<br className="hidden sm:block" />
+					  <br className="hidden sm:block" />
+					  Our mission focuses on bridging the web and physical world through tools like <span className="font-semibold text-orange-500">SignPass</span> and <span className="font-semibold text-orange-500">TokenTable</span>, fostering community-driven innovation in identity, DeFi, and token economies.<br className="hidden sm:block" />
+					  <br className="hidden sm:block" />
+					  Supported by leading investors like <span className="font-semibold text-orange-500">Sequoia</span> and <span className="font-semibold text-orange-500">Binance Labs</span>, we empower a new era of trust, collaboration, and opportunity for all.
 				</p>
 			</div>
 		</section>
