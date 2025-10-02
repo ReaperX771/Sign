@@ -163,7 +163,7 @@ function Que() {
           {/* Socials */}
           <div className="flex justify-center gap-6 mt-8">
             <a
-              href="https://wa.me/1234567890"
+              href="https://wa.me/qr/7A4U35SCTPLLK10"
               target="_blank"
               rel="noopener noreferrer"
               className="text-green-600 hover:scale-110 transition-transform text-2xl"
@@ -171,7 +171,7 @@ function Que() {
               <FaWhatsapp />
             </a>
             <a
-              href="https://twitter.com/yourprofile"
+              href="https://x.com/ReaperX771?t=2KfJeNsrbE5G54frMSaVuA&s=09"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-500 hover:scale-110 transition-transform text-2xl"
@@ -179,7 +179,7 @@ function Que() {
               <FaXTwitter />
             </a>
             <a
-              href="mailto:youremail@example.com"
+              href="mailto:control0177.gmail.com"
               className="text-red-500 hover:scale-110 transition-transform text-2xl"
             >
               <FaEnvelope />

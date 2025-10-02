@@ -7,7 +7,7 @@ import AnchorLink from "react-anchor-link-smooth-scroll";
 
 function Footer() {
   return (
-    <footer className="bg-[#0f0f0f] text-white py-12">
+    <footer id='footer' className="bg-[#0f0f0f] text-white py-12">
       <div className="w-[90%] m-auto grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Logo + Tagline */}
         <div>
@@ -48,7 +48,7 @@ function Footer() {
           <h4 className="text-lg font-semibold mb-4">Connect</h4>
           <div className="flex space-x-5 text-2xl">
             <a
-              href="https://wa.me/1234567890"
+              href="https://wa.me/qr/7A4U35SCTPLLK1"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-green-400 transition"
@@ -56,7 +56,7 @@ function Footer() {
               <FaWhatsapp />
             </a>
             <a
-              href="https://twitter.com/"
+              href="https://x.com/ReaperX771?t=2KfJeNsrbE5G54frMSaVuA&s=09"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-blue-400 transition"
@@ -64,7 +64,7 @@ function Footer() {
               <BsTwitterX />
             </a>
             <a
-              href="mailto:info@orangedynasty.com"
+              href="mailto:control0177.gmail.com"
               className="hover:text-red-400 transition"
             >
               <FaEnvelope />

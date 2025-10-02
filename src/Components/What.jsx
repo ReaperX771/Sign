@@ -56,7 +56,7 @@ function What() {
   ]
 
   return (
-    <section className="bg-white py-20 px-6 md:px-12 overflow-x-hidden">
+    <section id='what' className="bg-white py-20 px-6 md:px-12 overflow-x-hidden">
       <div className="max-w-6xl mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           What is <span className="text-[#fc4700]">Orange Dynasty?</span>

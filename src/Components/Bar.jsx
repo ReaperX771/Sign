@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import logo from "../assets/images/logo.svg";
 import { Link } from "react-router-dom";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 import {
-  FaInfoCircle,
   FaUsers,
   FaCoins,
   FaBook,
@@ -11,6 +11,7 @@ import {
   FaBars,
   FaTimes,
 } from "react-icons/fa";
+import { BiSolidNavigation } from "react-icons/bi";
 
 function Bar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,12 +34,17 @@ function Bar() {
 
   const navItems = [
     {
-      name: "About",
-      icon: <FaInfoCircle className="inline-block mr-2 text-white" />,
+      name: "Navigations",
+      icon: <BiSolidNavigation className="inline-block mr-2 text-white" />,
       key: "about",
       dropdown: [
-        { label: "Our Mission", link: "https://example.com/mission" },
-        { label: "Team", link: "https://example.com/team" },
+        { label: "Homepage", anchor: "#hero" },
+        { label: "What is Sign?", anchor: "#what" },
+        { label: "Why Sign", anchor: "#why" },
+        { label: "How it works", anchor: "#how" },
+        { label: "CTA", anchor: "#cta" },
+        { label: "Have Question?", anchor: "#faq" },
+        { label: "Footer", anchor: "#footer" },
       ],
     },
     {
@@ -50,6 +56,8 @@ function Bar() {
         { label: "X community", link: "https://x.com/sign" },
         { label: "Telegram", link: "https://t.me/orangedynasty" },
         { label: "Discord", link: "https://discord.gg/skA5fkqVwT" },
+        { label: "Our Mission", link: "https://example.com/mission" },
+        { label: "Team", link: "https://example.com/team" },
       ],
     },
     {
@@ -137,7 +145,17 @@ function Bar() {
                   `}
                 >
                   {item.dropdown.map((subItem) =>
-                    item.key === "gallery" ? (
+                    subItem.anchor ? (
+                      <AnchorLink
+                        key={subItem.label}
+                        href={subItem.anchor}
+                        offset="80"
+                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors cursor-pointer"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {subItem.label}
+                      </AnchorLink>
+                    ) : item.key === "gallery" && subItem.path ? (
                       <Link
                         key={subItem.label}
                         to={subItem.path}

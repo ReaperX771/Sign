@@ -3,7 +3,7 @@ import { FaGooglePlay, FaApple, FaAndroid } from "react-icons/fa";
 
 function Cta() {
   return (
-    <section className="bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 py-20 px-6 md:px-12 text-center text-white overflow-x-hidden">
+    <section id='cta' className="bg-gradient-to-r from-orange-500 via-orange-600 to-red-600 py-20 px-6 md:px-12 text-center text-white overflow-x-hidden">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold mb-6">
           Be Part of the <span className="text-yellow-200">Orange Dynasty</span> Today
