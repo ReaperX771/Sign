@@ -4,12 +4,11 @@ import { FaTwitter, FaDiscord, FaTelegram } from "react-icons/fa";
 import { SiSignal } from "react-icons/si"; 
 import nige from "../assets/images/nige.jfif";
 import jap from "../assets/images/jap.jpg";
-import gern from "../assets/images/gern.jpg";
-import braz from "../assets/images/braz.jpg";
 import swt from "../assets/images/swt.jpg";
-import moja from '../assets/images/moja.jpg'
+import moj from '../assets/images/moj.jpg'
 import rxx from '../assets/images/rxx.png'
 import phi from '../assets/images/phi.jpg'
+import doz from '../assets/images/doz.jpg'
 
 const people = [
   {
@@ -43,7 +42,7 @@ const people = [
   {
     name: "Dozyay",
     role: "********************r",
-    img: gern,
+    img:doz,
     quote:
       "*************************************************************************************************",
     highlight: "member",
@@ -57,7 +56,7 @@ const people = [
   {
     name: "Moja",
     role: "********************",
-    img:moja,
+    img:moj,
     quote:
       "********************************************************************************.",
     highlight: "member",
@@ -69,17 +68,17 @@ const people = [
     },
   },
   {
-    name: "Philip",
+    name: "Phillips",
     role: "********************",
     img:phi,
     quote:
       "************************************************************.",
     highlight: "member",
     socials: {
-      twitter: "#",
-      telegram: "#",
-      discord: "#",
-      sign: "#",
+      twitter: "https://x.com/OneFilo204?t=2HMt_MPonqouoY6WVkDrSQ&s=09",
+      telegram: "https://t.me/FILO2561",
+      discord: "https://discord.gg/ySvspeUp",
+      sign: "https://orange.sign.global/app?post=1973893513930616283",
     },
   },
   {
@@ -141,7 +140,7 @@ function Colla() {
   };
   return (
     <section
-      id="collaborators"
+      id="colla"
       className="bg-gradient-to-r from-orange-100 via-pink-100 to-purple-100 py-20 px-6 md:px-12 overflow-x-hidden"
     >
       <div className="max-w-4xl mx-auto text-center relative">

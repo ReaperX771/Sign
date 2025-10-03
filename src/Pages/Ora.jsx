@@ -1,135 +1,177 @@
 import React, { useState, useEffect } from "react";
 
 function Ora() {
-  const [totalOranges, setTotalOranges] = useState(() =>
+  const [oranges, setOranges] = useState(() =>
     parseFloat(localStorage.getItem("oranges")) || 0
   );
-  const [sessionOranges, setSessionOranges] = useState(0);
   const [falling, setFalling] = useState([]);
+  const [timeLeft, setTimeLeft] = useState(30);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(60);
+  const [tapIndex, setTapIndex] = useState(0);
+  const [playsLeft, setPlaysLeft] = useState(3);
+  const [roundEarnings, setRoundEarnings] = useState(0);
+  const [bombMessage, setBombMessage] = useState(false);
+  const [endMessage, setEndMessage] = useState("");
 
-  // Spawn oranges or bombs with increasing speed
+  const rewards = [0.5, 0.4, 0.3]; // reward cycle
+
+  // Daily reset logic
   useEffect(() => {
-    if (!isPlaying) return;
-    const drop = setInterval(() => {
-      const isBomb = Math.random() < 0.15; // 15% chance
-      // Speed logic:
-      // - at 50s left, speed is 120% faster (duration 45% of max)
-      // - at 30s left, speed is 200% faster (duration 33% of max)
-      // - from 50s to 0s, increase rapidly
-      const minDuration = 1.0;
-      const maxDuration = 5.0;
-      let fallDuration;
-      if (timeLeft > 50) {
-        // 60s to 50s: linear from maxDuration to 45% of maxDuration
-        const t = (60 - timeLeft) / 10; // 0 to 1 as timeLeft goes from 60 to 50
-        fallDuration = maxDuration - (maxDuration * 0.55) * t;
-      } else if (timeLeft > 30) {
-        // 50s to 30s: linear from 45% to 33% of maxDuration
-        const t = (50 - timeLeft) / 20; // 0 to 1 as timeLeft goes from 50 to 30
-        const start = maxDuration * 0.45;
-        const end = maxDuration * 0.33;
-        fallDuration = start - (start - end) * t;
-      } else {
-        // 30s to 0s: rapid decrease to minDuration
-        const t = (30 - timeLeft) / 30; // 0 to 1 as timeLeft goes from 30 to 0
-        const start = maxDuration * 0.33;
-        fallDuration = start - (start - minDuration) * (t * t * t); // cubic for rapid increase
-      }
-      fallDuration = Math.max(minDuration, fallDuration);
-      setFalling((prev) => [
-        ...prev,
-        {
-          id: Date.now() + Math.random(),
-          x: Math.random() * 90 + "%",
-          type: isBomb ? "bomb" : "orange",
-          fallDuration,
-        },
-      ]);
-    }, 1000);
+    const today = new Date().toDateString();
+    const savedDate = localStorage.getItem("lastPlayDate");
+    const savedPlays = parseInt(localStorage.getItem("playsLeft"), 10);
+
+    if (savedDate === today) {
+      setPlaysLeft(isNaN(savedPlays) ? 3 : savedPlays);
+    } else {
+      localStorage.setItem("lastPlayDate", today);
+      localStorage.setItem("playsLeft", "3");
+      setPlaysLeft(3);
+    }
+  }, []);
+
+  // Drop oranges and bombs with 60% orange, 40% bomb
+  useEffect(() => {
+    let drop;
+    if (isPlaying) {
+      drop = setInterval(() => {
+        const isBomb = Math.random() < 0.4; // 40% bomb, 60% orange
+        let xPos = Math.random() * 90 + "%";
+
+        if (isBomb) {
+          // Stick close to last orange if possible
+          const lastOrange = falling.find((o) => o.type === "orange");
+          if (lastOrange) {
+            const baseX = parseFloat(lastOrange.x);
+            const offset = Math.random() * 10 - 5; // ±5% for closer sticking
+            const newX = Math.min(90, Math.max(10, baseX + offset));
+            xPos = newX + "%";
+          }
+        }
+
+        setFalling((prev) => [
+          ...prev,
+          { id: Date.now(), x: xPos, type: isBomb ? "bomb" : "orange" },
+        ]);
+      }, 1000);
+    }
     return () => clearInterval(drop);
+  }, [isPlaying, falling]);
+
+  // Timer
+  useEffect(() => {
+    let timer;
+    if (isPlaying && timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft((t) => t - 1);
+      }, 1000);
+    } else if (isPlaying && timeLeft === 0) {
+      endGame();
+    }
+    return () => clearInterval(timer);
   }, [isPlaying, timeLeft]);
 
-  // Timer countdown
-  useEffect(() => {
-    if (!isPlaying) return;
-    if (timeLeft <= 0) {
-      endGame();
+  const startGame = () => {
+    if (playsLeft <= 0) {
+      setEndMessage("⚠️ You’ve already played 3 times today! Come back tomorrow.");
       return;
     }
-    const t = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-    return () => clearInterval(t);
-  }, [isPlaying, timeLeft]);
+    setIsPlaying(true);
+    setTimeLeft(30);
+    setFalling([]);
+    setTapIndex(0);
+    setRoundEarnings(0);
+    setBombMessage(false);
+    setEndMessage("");
 
-  const collectItem = (id, type) => {
-    if (type === "orange") {
-      setSessionOranges((prev) => {
-        const newSession = prev + 0.2;
-        const newTotal = totalOranges + 0.2;
-        setTotalOranges(newTotal);
-        localStorage.setItem("oranges", newTotal);
-        return newSession;
-      });
-    } else if (type === "bomb") {
-      setSessionOranges((prev) => {
-        const newSession = Math.max(0, prev * 0.9);
-        const newTotal = totalOranges - (prev - newSession);
-        setTotalOranges(newTotal);
-        localStorage.setItem("oranges", newTotal);
-        return newSession;
-      });
+    const newPlays = playsLeft - 1;
+    setPlaysLeft(newPlays);
+    localStorage.setItem("playsLeft", newPlays.toString());
+    localStorage.setItem("lastPlayDate", new Date().toDateString());
+  };
+
+  const collectOrange = (id, type) => {
+    if (type === "bomb") {
+      // Clear round earnings
+      setRoundEarnings(0);
+      setTapIndex(0);
+      setBombMessage(true); // show message
+      setTimeout(() => setBombMessage(false), 1000); // hide after 1 sec
+    } else {
+      const reward = rewards[tapIndex % rewards.length];
+      setRoundEarnings((prev) => prev + reward);
+      setTapIndex((prev) => prev + 1);
     }
     setFalling((prev) => prev.filter((o) => o.id !== id));
   };
 
-  const startGame = () => {
-    setIsPlaying(true);
-    setSessionOranges(0);
-    setTimeLeft(60);
-    setFalling([]);
-  };
-
   const endGame = () => {
     setIsPlaying(false);
-    const newTotal = totalOranges + sessionOranges;
-    setTotalOranges(newTotal);
+    const newTotal = oranges + roundEarnings;
+    setOranges(newTotal);
     localStorage.setItem("oranges", newTotal);
+    setEndMessage(`✅ Round Over! You earned ${roundEarnings.toFixed(1)} 🍊`);
+  };
+
+  const resetGame = () => {
+    setOranges(0);
+    setPlaysLeft(3);
+    setEndMessage("Game reset!");
+    localStorage.setItem("oranges", "0");
+    localStorage.setItem("playsLeft", "3");
+    localStorage.setItem("lastPlayDate", new Date().toDateString());
   };
 
   return (
-    <div className="relative h-screen w-full bg-orange-200 pt-50 overflow-hidden flex flex-col items-center">
-      <div className="w-full flex flex-col items-center mt-4">
-        <div className="flex flex-row gap-6 justify-center items-center">
-          <p className="text-2xl font-bold">⏰ {timeLeft}s</p>
-          <p className="text-2xl font-bold">🍊 {totalOranges.toFixed(1)}</p>
-        </div>
-        {!isPlaying && (
-          <>
-            <h2 className="text-2xl font-bold mt-4">Catch Oranges 🍊</h2>
-            <p>Session Oranges: {sessionOranges.toFixed(1)} 🍊</p>
-            <button
-              onClick={startGame}
-              className="mt-4 px-6 py-3 bg-orange-600 text-white rounded-lg shadow-lg hover:scale-105 transition"
-            >
-              ▶️ Start 1-Minute Game
-            </button>
-          </>
-        )}
-      </div>
+    <div className="relative h-screen w-full bg-orange-200 py-40 overflow-hidden flex flex-col items-center">
+      <h2 className="text-2xl font-bold mb-4">Catch Oranges 🍊</h2>
 
+      {/* Persistent stats */}
+      <p>Total Oranges: {oranges.toFixed(1)}</p>
+      <p>Plays Left Today: {playsLeft}</p>
+      <p>Round Earnings: {roundEarnings.toFixed(1)} 🍊</p>
+
+      {/* Clock instead of text */}
+      {isPlaying && (
+        <p className="text-lg mt-2">⏰ {timeLeft}s</p>
+      )}{bombMessage && (
+        <p className="mt-2 text-red-600 font-bold">
+          💣 Bomb hit! Earnings cleared!
+        </p>
+      )}
+
+      {endMessage && <p className="mt-2 font-semibold">{endMessage}</p>}
+
+      {!isPlaying && (
+        <>
+          <button
+            onClick={startGame}
+            className="mt-6 px-8 py-3 bg-orange-500 text-white rounded-lg font-semibold shadow-lg hover:scale-105 transition"
+          >
+            Start Game
+          </button>
+          {/* <button
+            onClick={resetGame}
+            className="mt-4 px-8 py-3 bg-red-500 text-white rounded-lg font-semibold shadow-lg hover:scale-105 transition"
+          >
+            Reset Game
+          </button> */}
+        </>
+      )}
+
+      {/* Falling objects */}
       {falling.map((o) => (
         <div
           key={o.id}
-          onClick={() => collectItem(o.id, o.type)}
+          onClick={() => collectOrange(o.id, o.type)}
           className="absolute text-3xl cursor-pointer"
           style={{
             top: "0px",
             left: o.x,
-            animation: `fall ${o.fallDuration || 5}s linear forwards`,
+            animation: "fall 3s linear forwards",
           }}
         >
-          {o.type === "orange" ? "🍊" : "💣"}
+          {o.type === "bomb" ? "💣" : "🍊"}
         </div>
       ))}
 

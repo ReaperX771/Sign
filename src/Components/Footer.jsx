@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import { BsTwitterX } from "react-icons/bs";
 import logo from "../assets/images/logo.svg";
@@ -6,6 +7,27 @@ import { Link } from "react-router-dom";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 
 function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Handles anchor navigation from any route
+  const handleAnchorNav = (anchor) => {
+    const scrollWithOffset = (el) => {
+      if (!el) return;
+      const y = el.getBoundingClientRect().top + window.pageYOffset - 80; // 80px offset
+      window.scrollTo({ top: y, behavior: "smooth" });
+    };
+    if (location.pathname !== "/") {
+      navigate("/", { replace: false });
+      setTimeout(() => {
+        const el = document.querySelector(anchor);
+        scrollWithOffset(el);
+      }, 300);
+    } else {
+      const el = document.querySelector(anchor);
+      scrollWithOffset(el);
+    }
+  };
   return (
     <footer id='footer' className="bg-[#0f0f0f] text-white py-12">
       <div className="w-[90%] m-auto grid md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -24,11 +46,11 @@ function Footer() {
         <div>
           <h4 className="text-lg font-semibold mb-4">Explore</h4>
           <ul className="space-y-2 text-gray-300 text-sm">
-            <li><AnchorLink  href="#about" className="hover:text-orange-400 transition">About</AnchorLink></li>
-            <li><AnchorLink offset={50}  href="#how" className="hover:text-orange-400 transition">How it Works</AnchorLink></li>
-            <li><AnchorLink offset={50} href="#community" className="hover:text-orange-400 transition">Community</AnchorLink></li>
-            <li><AnchorLink offset={50}  href="#faq" className="hover:text-orange-400 transition">FAQ</AnchorLink></li>
-            <li><AnchorLink href="#contact" className="hover:text-orange-400 transition">Contact</AnchorLink></li>
+            <li><button onClick={() => handleAnchorNav("#about")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">About</button></li>
+            <li><button onClick={() => handleAnchorNav("#how")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">How it Works</button></li>
+            <li><button onClick={() => handleAnchorNav("#community")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">Community</button></li>
+            <li><button onClick={() => handleAnchorNav("#faq")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">FAQ</button></li>
+            <li><button onClick={() => handleAnchorNav("#contact")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">Contact</button></li>
           </ul>
         </div>
 
@@ -36,10 +58,10 @@ function Footer() {
         <div>
           <h4 className="text-lg font-semibold mb-4">Support</h4>
           <ul className="space-y-2 text-gray-300 text-sm">
-            <li><AnchorLink href="#form" className="hover:text-orange-400 transition">Ask a Question</AnchorLink></li>
-            <li><AnchorLink href="#docs" className="hover:text-orange-400 transition">Documentation</AnchorLink></li>
-            <li><AnchorLink href="#privacy" className="hover:text-orange-400 transition">Privacy Policy</AnchorLink></li>
-            <li><AnchorLink href="#terms" className="hover:text-orange-400 transition">Terms of Service</AnchorLink></li>
+            <li><Link to="/ask" className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">Ask a Question</Link></li>
+            <li><Link to="/doc"  className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">Documentation</Link></li>
+            <li><Link to="/priva" className="hover:text-orange-400 transition">Privacy Policy</Link></li>
+            <li><Link to="/tos" className="hover:text-orange-400 transition">Terms of Service</Link></li>
           </ul>
         </div>
 
