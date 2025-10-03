@@ -9,18 +9,47 @@ function Ora() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeLeft, setTimeLeft] = useState(60);
 
-  // Spawn oranges or bombs
+  // Spawn oranges or bombs with increasing speed
   useEffect(() => {
     if (!isPlaying) return;
     const drop = setInterval(() => {
       const isBomb = Math.random() < 0.15; // 15% chance
+      // Speed logic:
+      // - at 50s left, speed is 120% faster (duration 45% of max)
+      // - at 30s left, speed is 200% faster (duration 33% of max)
+      // - from 50s to 0s, increase rapidly
+      const minDuration = 1.0;
+      const maxDuration = 5.0;
+      let fallDuration;
+      if (timeLeft > 50) {
+        // 60s to 50s: linear from maxDuration to 45% of maxDuration
+        const t = (60 - timeLeft) / 10; // 0 to 1 as timeLeft goes from 60 to 50
+        fallDuration = maxDuration - (maxDuration * 0.55) * t;
+      } else if (timeLeft > 30) {
+        // 50s to 30s: linear from 45% to 33% of maxDuration
+        const t = (50 - timeLeft) / 20; // 0 to 1 as timeLeft goes from 50 to 30
+        const start = maxDuration * 0.45;
+        const end = maxDuration * 0.33;
+        fallDuration = start - (start - end) * t;
+      } else {
+        // 30s to 0s: rapid decrease to minDuration
+        const t = (30 - timeLeft) / 30; // 0 to 1 as timeLeft goes from 30 to 0
+        const start = maxDuration * 0.33;
+        fallDuration = start - (start - minDuration) * (t * t * t); // cubic for rapid increase
+      }
+      fallDuration = Math.max(minDuration, fallDuration);
       setFalling((prev) => [
         ...prev,
-        { id: Date.now(), x: Math.random() * 90 + "%", type: isBomb ? "bomb" : "orange" },
+        {
+          id: Date.now() + Math.random(),
+          x: Math.random() * 90 + "%",
+          type: isBomb ? "bomb" : "orange",
+          fallDuration,
+        },
       ]);
     }, 1000);
     return () => clearInterval(drop);
-  }, [isPlaying]);
+  }, [isPlaying, timeLeft]);
 
   // Timer countdown
   useEffect(() => {
@@ -97,7 +126,7 @@ function Ora() {
           style={{
             top: "0px",
             left: o.x,
-            animation: "fall 5s linear forwards",
+            animation: `fall ${o.fallDuration || 5}s linear forwards`,
           }}
         >
           {o.type === "orange" ? "🍊" : "💣"}

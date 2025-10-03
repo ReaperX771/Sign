@@ -1,7 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Confetti from "react-confetti";
 
 function Stre() {
+  const containerRef = useRef(null);
+  const [confettiSize, setConfettiSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+
+  useEffect(() => {
+    function updateSize() {
+      if (containerRef.current) {
+        setConfettiSize({
+          width: containerRef.current.offsetWidth,
+          height: containerRef.current.offsetHeight,
+        });
+      }
+    }
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
   const [streak, setStreak] = useState(() => parseInt(localStorage.getItem("streak")) || 0);
   const [lastClaim, setLastClaim] = useState(() => localStorage.getItem("lastClaim") || "");
   const [username, setUsername] = useState(() => localStorage.getItem("username") || "");
@@ -45,8 +61,17 @@ function Stre() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#fc9200] to-[#f72800] text-white text-center p-6">
-      {celebrate && <Confetti />}
+    <section ref={containerRef} className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#fc9200] to-[#f72800] text-white text-center p-6 overflow-x-hidden overflow-y-hidden">
+      {celebrate && <Confetti className="overflow-x-hidden" />}
+        {celebrate && (
+        <Confetti
+          width={confettiSize.width}
+          height={confettiSize.height}
+          numberOfPieces={250}
+          recycle={false}
+          style={{ maxWidth: '100%', overflowX: 'hidden', pointerEvents: 'none' }}
+        />
+        )}
       <h1 className="text-4xl font-bold mb-4">Orange Dynasty 🍊🔥</h1>
       <p className="text-lg mb-2">Username: {username}</p>
       <p className="text-lg mb-2">Current Streak: {streak} days</p>
@@ -60,7 +85,7 @@ function Stre() {
         {lastClaim === today ? "Already Claimed Today ✅" : "Claim Today’s Streak"}
       </button>
 
-      <button
+      {/* <button
   onClick={() => {
     localStorage.clear();
     window.location.reload();
@@ -68,7 +93,7 @@ function Stre() {
   className="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg"
 >
   🔄 Reset Streak (Dev Only)
-</button>
+</button> */}
     </section>
   );
 }

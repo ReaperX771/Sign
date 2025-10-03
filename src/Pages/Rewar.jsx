@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+
 export default function Rewar() {
   const [oranges, setOranges] = useState(() =>
     parseFloat(localStorage.getItem("oranges")) || 0
@@ -9,6 +10,24 @@ export default function Rewar() {
   );
   const [email, setEmail] = useState("");
   const [result, setResult] = useState("");
+  const [minClaim, setMinClaim] = useState(50);
+
+  useEffect(() => {
+    // Calculate how many days since the first streak/claim
+    let startDate = localStorage.getItem("claimStartDate");
+    if (!startDate) {
+      startDate = new Date().toISOString();
+      localStorage.setItem("claimStartDate", startDate);
+    }
+    const now = new Date();
+    const start = new Date(startDate);
+    const diffDays = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+    if (diffDays < 2) {
+      setMinClaim(50);
+    } else {
+      setMinClaim(100);
+    }
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("oranges", oranges);
@@ -16,8 +35,8 @@ export default function Rewar() {
 
   const handleClaim = async (e) => {
     e.preventDefault();
-    if (oranges < 50) {
-      setResult("⚠️ You need at least 10 oranges to claim!");
+    if (oranges < minClaim) {
+      setResult(`⚠️ You need at least ${minClaim} oranges to claim!`);
       return;
     }
 
@@ -41,6 +60,8 @@ export default function Rewar() {
       localStorage.setItem("username", username);
       setOranges(0); // reset oranges
       localStorage.setItem("oranges", 0);
+      // Reset claim start date for next period
+      localStorage.setItem("claimStartDate", new Date().toISOString());
     } else {
       console.error("Error", data);
       setResult("❌ " + data.message);
@@ -75,7 +96,7 @@ export default function Rewar() {
 
         <button
           type="submit"
-          disabled={oranges < 10}
+          disabled={oranges < minClaim}
           className="px-6 py-2 bg-orange-600 text-white rounded-lg shadow hover:scale-105 transition disabled:bg-gray-400"
         >
           Claim Oranges
@@ -83,7 +104,7 @@ export default function Rewar() {
       </form>
 
       <p className="mt-3">{result}</p>
-      <p className="text-lg font-bold">Minimum claim is 50🍊</p>
+  <p className="text-lg font-bold">Minimum claim is {minClaim}🍊</p>
     </div>
   );
 }
