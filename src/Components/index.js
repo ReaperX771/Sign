@@ -6,8 +6,7 @@ import How from "./How";
 import Community from "./Community";
 import Cta from "./Cta";
 import Colla from "./Colla"
-import Cola from "./Cola"
 import Que from "./Que";
 import Footer from "./Footer";
 
-export { Bar , Hero , What , Why , How , Colla , Cola , Community , Cta , Que , Footer };
+export { Bar , Hero , What , Why , How , Colla , Community , Cta , Que , Footer };

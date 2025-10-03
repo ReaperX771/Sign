@@ -9,8 +9,8 @@ function ScrollToTop() {
   return null;
 }
 import './App.css'
-import { Bar, Cola, Colla, Community, Cta, Footer, Hero, How, Que, What, Why } from './Components'
-import { Gallery, Mission } from "./Pages";
+import { Bar, Colla, Community, Cta, Footer, Hero, How, Que, What, Why } from './Components'
+import { Gallery, Mission, Ora, Rewar, Stre } from "./Pages";
 
 
 function App() {
@@ -21,6 +21,9 @@ function App() {
       <Routes>
         <Route path="gallery/photos" element={<Gallery/>} />
         <Route path="community/mission" element={<Mission/>} />
+        <Route path="fung/stre" element={<Stre/>} />
+        <Route path="fung/ora" element={<Ora/>} />
+        <Route path="fung/rewar" element={<Rewar/>} />
         <Route
           path="/"
           element={ <>
@@ -31,7 +34,6 @@ function App() {
             <Community/>
             <Cta/>
             <Colla/>
-            <Cola/>
             <Que/>
           </>}
         />

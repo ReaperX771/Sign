@@ -9,6 +9,7 @@ import braz from "../assets/images/braz.jpg";
 import swt from "../assets/images/swt.jpg";
 import moja from '../assets/images/moja.jpg'
 import rxx from '../assets/images/rxx.png'
+import phi from '../assets/images/phi.jpg'
 
 const people = [
   {
@@ -68,9 +69,9 @@ const people = [
     },
   },
   {
-    name: "Member 4",
+    name: "Philip",
     role: "********************",
-    img: nige,
+    img:phi,
     quote:
       "************************************************************.",
     highlight: "member",
