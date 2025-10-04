@@ -97,7 +97,7 @@ const people = [
   },
   {
     name: "ReaperX",
-    role: "Lead Developer & Designer",
+    role: "Lead Developer & UI/UX Designer",
     img: rxx,
     quote:
       "Brought Orange Dynasty to life — from design concepts to functional Web3 experiences. The mind behind the visuals, logic, and flow.",

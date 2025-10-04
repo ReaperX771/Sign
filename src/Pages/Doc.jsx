@@ -47,7 +47,7 @@ export default function Doc() {
 
 				<section>
 					<h2 className="text-xl sm:text-2xl font-semibold text-orange-500 mb-2">Contact & Support</h2>
-					<p className="text-sm sm:text-base text-gray-800 mb-2">Need more help? Visit the <b>Ask a Question</b> page or email <a href="mailto:support@orangedynasty.com" className="text-orange-600 underline">support@orangedynasty.com</a>.</p>
+					<p className="text-sm sm:text-base text-gray-800 mb-2">Need more help? Visit the <b>Ask a Question</b> page or email <a href="mailto:control0177@gmail.com" className="text-orange-600 underline">control0177@gmail.com</a>.</p>
 				</section>
 			</div>
 		</section>
