@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-
-export default function Rewar() {
+export default function Reward() {
   const [oranges, setOranges] = useState(() =>
     parseFloat(localStorage.getItem("oranges")) || 0
   );
@@ -80,7 +79,7 @@ export default function Rewar() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-orange-100 p-4 sm:p-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-orange-100 p-4 sm:p-6 pt-16 sm:pt-24"> {/* Added top padding */}
       <h2 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-4 text-center">🍊 Claim Your Oranges</h2>
       <p className="mb-2 text-base sm:text-lg text-center">Your current balance: <b>{oranges.toFixed(1)} Oranges</b></p>
 

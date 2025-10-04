@@ -80,37 +80,6 @@ function Stre() {
     }
   };
 
-  // Meme section
-  const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    setCurrentTime(new Date().toLocaleString());
-  }, []);
-
-  const memes = [
-    {
-      url: "https://www.tiktok.com/api/img/?itemId=7549141001416396054&location=0&aid=1988",
-      title: "Top 5 Memes of October 2025",
-    },
-    {
-      url: "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3735808670283404813",
-      title: "Which possibility would you love?",
-    },
-    {
-      url: "https://www.tiktok.com/api/img/?itemId=7464376472652827947&location=0&aid=1988",
-      title: "Top 5 Memes of October 2025",
-    },
-  ];
-
-  const nextMeme = () => {
-    setCurrentIndex((prev) => (prev + 1) % memes.length);
-  };
-
-  const prevMeme = () => {
-    setCurrentIndex((prev) => (prev - 1 + memes.length) % memes.length);
-  };
-
   return (
     <section ref={containerRef} className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#fc9200] to-[#f72800] text-white text-center p-6 overflow-x-hidden overflow-y-hidden">
       {celebrate && <Confetti className="overflow-x-hidden" />}
@@ -137,21 +106,6 @@ function Stre() {
       </button>
 
       {message && <p className="mt-4 text-xl font-semibold">{message}</p>}
-
-      {/* Meme section */}
-      <section className="meme mt-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-2">Meme of the Day - Added on {currentTime}</h2>
-        <div className="carousel flex flex-col items-center">
-          <img src={memes[currentIndex].url} alt={memes[currentIndex].title} className="w-full h-auto mb-4" />
-          <p className="text-lg mb-4">{memes[currentIndex].title} - Enjoy this funny meme!</p>
-          <div className="buttons flex justify-between w-full">
-            <button onClick={prevMeme} className="px-4 py-2 bg-blue-500 text-white rounded">Previous</button>
-            <a href={memes[currentIndex].url} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-green-500 text-white rounded">View</a>
-            <a href={memes[currentIndex].url} download className="px-4 py-2 bg-yellow-500 text-white rounded">Download</a>
-            <button onClick={nextMeme} className="px-4 py-2 bg-blue-500 text-white rounded">Next</button>
-          </div>
-        </div>
-      </section>
 
       {/* <button
   onClick={() => {

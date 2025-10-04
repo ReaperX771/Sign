@@ -80,7 +80,7 @@ export default function Mem() {
   const meme = memes[current];
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-orange-400 to-red-500 flex flex-col items-center justify-center text-white p-6">
+    <section className="min-h-screen bg-gradient-to-br py-30 from-orange-400 to-red-500 flex flex-col items-center justify-center text-white p-6">
       <h1 className="text-4xl font-extrabold mb-6">Meme of the Day 😂</h1>
 
       <div className="relative w-full max-w-md bg-white text-black rounded-2xl shadow-2xl overflow-hidden">
