@@ -46,7 +46,7 @@ function Footer() {
         <div>
           <h4 className="text-lg font-semibold mb-4">Explore</h4>
           <ul className="space-y-2 text-gray-300 text-sm">
-            <li><button onClick={() => handleAnchorNav("#about")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">About</button></li>
+            <li><button onClick={() => handleAnchorNav("#what")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">About</button></li>
             <li><button onClick={() => handleAnchorNav("#how")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">How it Works</button></li>
             <li><button onClick={() => handleAnchorNav("#community")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">Community</button></li>
             <li><button onClick={() => handleAnchorNav("#faq")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">FAQ</button></li>

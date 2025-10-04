@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function Ora() {
   const [oranges, setOranges] = useState(() =>
@@ -12,8 +12,11 @@ function Ora() {
   const [roundEarnings, setRoundEarnings] = useState(0);
   const [bombMessage, setBombMessage] = useState(false);
   const [endMessage, setEndMessage] = useState("");
+  const [dropInterval, setDropInterval] = useState(1000); // Starting drop interval
 
-  const rewards = [0.5, 0.4, 0.3]; // reward cycle
+  const rewards = [0.7, 0.8, 1]; // reward cycle
+
+  const lastOrangeRef = useRef(null); // Ref to track last orange position without depending on falling state
 
   // Daily reset logic
   useEffect(() => {
@@ -36,40 +39,58 @@ function Ora() {
     if (isPlaying) {
       drop = setInterval(() => {
         const isBomb = Math.random() < 0.4; // 40% bomb, 60% orange
-        let xPos = Math.random() * 90 + "%";
+        let xPos = (Math.random() * 80 + 10) + "%"; // More consistent positioning: between 10% and 90%
 
-        if (isBomb) {
-          // Stick close to last orange if possible
-          const lastOrange = falling.find((o) => o.type === "orange");
-          if (lastOrange) {
-            const baseX = parseFloat(lastOrange.x);
-            const offset = Math.random() * 10 - 5; // ±5% for closer sticking
-            const newX = Math.min(90, Math.max(10, baseX + offset));
-            xPos = newX + "%";
-          }
+        if (isBomb && lastOrangeRef.current !== null) {
+          // Stick close to last orange
+          const baseX = lastOrangeRef.current;
+          const offset = Math.random() * 10 - 5; // ±5% for closer sticking
+          const newX = Math.min(90, Math.max(10, baseX + offset));
+          xPos = newX + "%";
         }
+
+        // Calculate fall duration based on current time left (faster over time)
+        const initialDuration = 3;
+        const minDuration = 1;
+        const progress = (30 - timeLeft) / 30;
+        const duration = initialDuration - progress * (initialDuration - minDuration);
 
         setFalling((prev) => [
           ...prev,
-          { id: Date.now(), x: xPos, type: isBomb ? "bomb" : "orange" },
+          { id: Date.now(), x: xPos, type: isBomb ? "bomb" : "orange", duration },
         ]);
-      }, 1000);
+
+        if (!isBomb) {
+          lastOrangeRef.current = parseFloat(xPos);
+        }
+      }, dropInterval);
     }
     return () => clearInterval(drop);
-  }, [isPlaying, falling]);
+  }, [isPlaying, dropInterval, timeLeft]); // Depend on timeLeft for duration calc, but since it changes often, it's ok
 
-  // Timer
+  // Timer and speed up drop interval
   useEffect(() => {
     let timer;
     if (isPlaying && timeLeft > 0) {
       timer = setInterval(() => {
-        setTimeLeft((t) => t - 1);
+        setTimeLeft((t) => {
+          const newTime = t - 1;
+          // Speed up drop interval as time progresses
+          if (newTime <= 20 && dropInterval > 800) {
+            setDropInterval(800);
+          } else if (newTime <= 10 && dropInterval > 600) {
+            setDropInterval(600);
+          } else if (newTime <= 5 && dropInterval > 400) {
+            setDropInterval(400);
+          }
+          return newTime;
+        });
       }, 1000);
     } else if (isPlaying && timeLeft === 0) {
       endGame();
     }
     return () => clearInterval(timer);
-  }, [isPlaying, timeLeft]);
+  }, [isPlaying, timeLeft, dropInterval]);
 
   const startGame = () => {
     if (playsLeft <= 0) {
@@ -83,6 +104,8 @@ function Ora() {
     setRoundEarnings(0);
     setBombMessage(false);
     setEndMessage("");
+    setDropInterval(1000); // Reset drop interval
+    lastOrangeRef.current = null;
 
     const newPlays = playsLeft - 1;
     setPlaysLeft(newPlays);
@@ -168,7 +191,7 @@ function Ora() {
           style={{
             top: "0px",
             left: o.x,
-            animation: "fall 3s linear forwards",
+            animation: `fall ${o.duration}s linear forwards`,
           }}
         >
           {o.type === "bomb" ? "💣" : "🍊"}

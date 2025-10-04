@@ -68,7 +68,7 @@ const people = [
     },
   },
   {
-    name: "Phillips",
+    name: "OneFilo Phillips",
     role: "********************",
     img:phi,
     quote:

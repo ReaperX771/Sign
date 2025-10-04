@@ -23,6 +23,8 @@ function Stre() {
   const [username, setUsername] = useState(() => localStorage.getItem("username") || "");
   const [oranges, setOranges] = useState(() => parseFloat(localStorage.getItem("oranges")) || 0);
   const [celebrate, setCelebrate] = useState(false);
+  const [isBigCelebration, setIsBigCelebration] = useState(false);
+  const [message, setMessage] = useState("");
   const today = new Date().toDateString();
 
   const handleUsernameSubmit = () => {
@@ -48,16 +50,65 @@ function Stre() {
       localStorage.setItem("lastClaim", today);
 
       // Add oranges
-      let reward = 2;
-      if (newStreak % 5 === 0) reward += 5; // Bonus on 5th streak
-      const newOranges = oranges + reward;
+      let reward = 5;
+      let bonusMessage = "";
 
+      if (streak === 0) {
+        reward += 10; // Welcome bonus
+        bonusMessage = "Welcome! Here's a 10 🍊 bonus on your first claim!";
+      }
+
+      let isBig = false;
+      if (newStreak % 5 === 0) {
+        reward += 5; // Streak bonus
+        bonusMessage = "Keep up the streak! +5 🍊 bonus";
+        isBig = true;
+      }
+
+      const newOranges = oranges + reward;
       setOranges(newOranges);
       localStorage.setItem("oranges", newOranges);
 
+      setMessage(bonusMessage);
       setCelebrate(true);
-      setTimeout(() => setCelebrate(false), 5000);
+      setIsBigCelebration(isBig);
+      setTimeout(() => {
+        setCelebrate(false);
+        setIsBigCelebration(false);
+        setMessage("");
+      }, isBig ? 8000 : 5000);
     }
+  };
+
+  // Meme section
+  const [currentTime, setCurrentTime] = useState(new Date().toLocaleString());
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    setCurrentTime(new Date().toLocaleString());
+  }, []);
+
+  const memes = [
+    {
+      url: "https://www.tiktok.com/api/img/?itemId=7549141001416396054&location=0&aid=1988",
+      title: "Top 5 Memes of October 2025",
+    },
+    {
+      url: "https://lookaside.instagram.com/seo/google_widget/crawler/?media_id=3735808670283404813",
+      title: "Which possibility would you love?",
+    },
+    {
+      url: "https://www.tiktok.com/api/img/?itemId=7464376472652827947&location=0&aid=1988",
+      title: "Top 5 Memes of October 2025",
+    },
+  ];
+
+  const nextMeme = () => {
+    setCurrentIndex((prev) => (prev + 1) % memes.length);
+  };
+
+  const prevMeme = () => {
+    setCurrentIndex((prev) => (prev - 1 + memes.length) % memes.length);
   };
 
   return (
@@ -67,7 +118,7 @@ function Stre() {
         <Confetti
           width={confettiSize.width}
           height={confettiSize.height}
-          numberOfPieces={250}
+          numberOfPieces={isBigCelebration ? 500 : 250}
           recycle={false}
           style={{ maxWidth: '100%', overflowX: 'hidden', pointerEvents: 'none' }}
         />
@@ -84,6 +135,23 @@ function Stre() {
       >
         {lastClaim === today ? "Already Claimed Today ✅" : "Claim Today’s Streak"}
       </button>
+
+      {message && <p className="mt-4 text-xl font-semibold">{message}</p>}
+
+      {/* Meme section */}
+      <section className="meme mt-8 w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-2">Meme of the Day - Added on {currentTime}</h2>
+        <div className="carousel flex flex-col items-center">
+          <img src={memes[currentIndex].url} alt={memes[currentIndex].title} className="w-full h-auto mb-4" />
+          <p className="text-lg mb-4">{memes[currentIndex].title} - Enjoy this funny meme!</p>
+          <div className="buttons flex justify-between w-full">
+            <button onClick={prevMeme} className="px-4 py-2 bg-blue-500 text-white rounded">Previous</button>
+            <a href={memes[currentIndex].url} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-green-500 text-white rounded">View</a>
+            <a href={memes[currentIndex].url} download className="px-4 py-2 bg-yellow-500 text-white rounded">Download</a>
+            <button onClick={nextMeme} className="px-4 py-2 bg-blue-500 text-white rounded">Next</button>
+          </div>
+        </div>
+      </section>
 
       {/* <button
   onClick={() => {

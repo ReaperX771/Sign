@@ -10,7 +10,7 @@ function ScrollToTop() {
 }
 import './App.css'
 import { Bar, Colla, Community, Cta, Footer, Hero, How, Que, What, Why } from './Components'
-import { Ask, Doc, Gallery, Mission, Ora, Priva, Rewar, Stre, Tos } from "./Pages";
+import { Ask, Doc, Gallery, Mem, Mission, Ora, Priva, Rewar, Stre, Tos } from "./Pages";
 
 
 function App() {
@@ -28,6 +28,7 @@ function App() {
         <Route path="/tos" element={<Tos/>} />
         <Route path="/ask" element={<Ask/>} />
         <Route path="/doc" element={<Doc/>} />
+        <Route path="/mem" element={<Mem/>} />
         <Route
           path="/"
           element={ <>

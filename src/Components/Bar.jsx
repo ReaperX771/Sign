@@ -120,7 +120,7 @@ function Bar() {
       key: "gallery",
       dropdown: [
         { label: "Photos", path: "/gallery/photos" },
-        // { label: "Videos", path: "/gallery/videos" },
+         { label: "Memes", path: "/mem" },
       ],
     },
     {

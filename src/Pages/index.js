@@ -7,5 +7,6 @@ import Priva from "./Priva";
 import Tos from "./Tos"
 import Ask from "./Ask";
 import Doc from "./Doc";
+import Mem from "./Mem";
 
-export { Gallery , Mission , Stre  , Ora , Rewar , Priva , Tos , Ask , Doc};
+export { Gallery , Mission , Stre  , Ora , Rewar , Priva , Tos , Ask , Doc , Mem};
