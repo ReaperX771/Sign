@@ -72,14 +72,14 @@ function Bar() {
       icon: <BiSolidNavigation className="inline-block mr-2 text-white" />,
       key: "about",
       dropdown: [
-  { label: "Homepage", anchor: "#hero" },
-  { label: "What is Sign?", anchor: "#what" },
-  { label: "Why Sign", anchor: "#why" },
-  { label: "How it works", anchor: "#how" },
-  { label: "CTA", anchor: "#cta" },
-  { label: "Collaborators", anchor: "#colla" },
-  { label: "Have Question?", anchor: "#faq" },
-  { label: "Footer", anchor: "#footer" },
+        { label: "Homepage", anchor: "#hero" },
+        { label: "What is Sign?", anchor: "#what" },
+        { label: "Why Sign", anchor: "#why" },
+        { label: "How it works", anchor: "#how" },
+        { label: "CTA", anchor: "#cta" },
+        { label: "Collaborators", anchor: "#colla" },
+        { label: "Have Question?", anchor: "#faq" },
+        { label: "Footer", anchor: "#footer" },
       ],
     },
     {
@@ -120,7 +120,7 @@ function Bar() {
       key: "gallery",
       dropdown: [
         { label: "Photos", path: "/gallery/photos" },
-         { label: "Memes", path: "/mem" },
+        { label: "Memes", path: "/mem" },
       ],
     },
     {
@@ -140,7 +140,7 @@ function Bar() {
       <div>
         <div className="flex justify-between items-center px-4 sm:px-6 lg:px-20 py-6 bg-gradient-to-b from-[#fc9200] to-[#f72800] fixed top-0 left-0 right-0 shadow z-50">
           {/* Logo */}
-          <button className="cursor-pointer z-50 bg-transparent border-none p-0" onClick={() => handleAnchorNav("#hero") }>
+          <button className="cursor-pointer z-50 bg-transparent border-none p-0" onClick={() => handleAnchorNav("#hero")}>
             <img src={logo} alt="Orange Dynasty Logo" className="h-10" />
           </button>
 
@@ -163,62 +163,65 @@ function Bar() {
           <nav
             className={`
               ${isMenuOpen
-                ? "fixed inset-0 bg-gradient-to-b from-[#f72800] to-[#fc9200] flex flex-col items-start justify-start pt-24 gap-6 pl-6 z-40 overflow-y-auto"
+                ? "fixed inset-0 bg-gradient-to-b from-[#f72800] to-[#fc9200] backdrop-blur-md bg-opacity-95 flex flex-col items-start justify-start pt-24 gap-6 pl-6 z-40 overflow-y-auto"
                 : "hidden"}
               xl:hidden
             `}
           >
-            {navItems.map((item) => (
-              <div key={item.key} className="relative text-left">
-                <button
-                  onClick={() => toggleDropdown(item.key)}
-                  className="flex items-center justify-start hover:text-orange-300 transition-colors duration-200 w-full group"
-                >
-                  {item.icon}
-                  <span className="no-underline text-white">{item.name}</span>
-                  <FaChevronDown
-                    className={`ml-2 text-white transition-transform duration-200 group-hover:text-yellow-300 ${dropdownOpen[item.key] ? "rotate-180 text-yellow-300" : ""}`}
-                  />
-                </button>
-                <div
-                  className={`
-                    ${dropdownOpen[item.key] ? "block" : "hidden"}
-                    bg-gray-900 shadow-lg rounded-md mt-2 w-48
-                  `}
-                >
-                  {item.dropdown.map((subItem) =>
-                    subItem.anchor ? (
-                      <button
-                        key={subItem.label}
-                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors cursor-pointer text-left w-full"
-                        onClick={() => handleAnchorNav(subItem.anchor)}
-                      >
-                        {subItem.label}
-                      </button>
-                    ) : subItem.path ? (
-                      <button
-                        key={subItem.label}
-                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors text-left w-full"
-                        onClick={() => { setIsMenuOpen(false); navigate(subItem.path); }}
-                      >
-                        {subItem.label}
-                      </button>
-                    ) : (
-                      <a
-                        key={subItem.label}
-                        href={subItem.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block px-4 py-2 text-white hover:bg-orange-600 transition-colors"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {subItem.label}
-                      </a>
-                    )
-                  )}
+            {/* Add a solid background container for the menu items */}
+            <div className="w-full max-w-sm bg-gradient-to-b from-[#f72800]/95 to-[#fc9200]/95 backdrop-blur-lg rounded-lg p-6 shadow-2xl">
+              {navItems.map((item) => (
+                <div key={item.key} className="relative text-left w-full mb-4 last:mb-0">
+                  <button
+                    onClick={() => toggleDropdown(item.key)}
+                    className="flex items-center justify-start hover:text-orange-300 transition-colors duration-200 w-full group p-2 rounded-lg hover:bg-white/10"
+                  >
+                    {item.icon}
+                    <span className="no-underline text-white font-medium">{item.name}</span>
+                    <FaChevronDown
+                      className={`ml-2 text-white transition-transform duration-200 group-hover:text-yellow-300 ${dropdownOpen[item.key] ? "rotate-180 text-yellow-300" : ""}`}
+                    />
+                  </button>
+                  <div
+                    className={`
+                      ${dropdownOpen[item.key] ? "block" : "hidden"}
+                      bg-gray-900/95 backdrop-blur-md shadow-lg rounded-md mt-2 w-full border border-white/10
+                    `}
+                  >
+                    {item.dropdown.map((subItem) =>
+                      subItem.anchor ? (
+                        <button
+                          key={subItem.label}
+                          className="block px-4 py-3 text-white hover:bg-orange-600 transition-colors cursor-pointer text-left w-full border-b border-white/10 last:border-b-0"
+                          onClick={() => handleAnchorNav(subItem.anchor)}
+                        >
+                          {subItem.label}
+                        </button>
+                      ) : subItem.path ? (
+                        <button
+                          key={subItem.label}
+                          className="block px-4 py-3 text-white hover:bg-orange-600 transition-colors text-left w-full border-b border-white/10 last:border-b-0"
+                          onClick={() => { setIsMenuOpen(false); navigate(subItem.path); }}
+                        >
+                          {subItem.label}
+                        </button>
+                      ) : (
+                        <a
+                          key={subItem.label}
+                          href={subItem.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block px-4 py-3 text-white hover:bg-orange-600 transition-colors border-b border-white/10 last:border-b-0"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {subItem.label}
+                        </a>
+                      )
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </nav>
 
           {/* Navbar for xl and up */}

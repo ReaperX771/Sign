@@ -13,10 +13,10 @@ import lio from "../assets/images/lioo.jpg";
 const people = [
   {
     name: "NiceGuy",
-    role: "Project Coordinator & Strategic Lead",
+    role: "Project Coordinator",
     img: nige,
     quote:
-      "As the Project Coordinator, NiceGuy ensures the Orange Dynasty vision remains perfectly aligned while keeping the entire team synchronized and motivated. He serves as the crucial bridge between creative concepts and practical execution, overseeing project timelines, resource allocation, and team coordination to deliver exceptional results.",
+      "Keeps the Orange Dynasty vision aligned and the team on track. The bridge between creativity and execution.",
     highlight: "leader",
     socials: {
       twitter: "https://x.com/Az_croven",
@@ -27,10 +27,10 @@ const people = [
   },
   {
     name: "Swtcryptovibe12",
-    role: "Accessibility & Usability Review Specialist",
+    role: "Accessibility Reviewer",
     img: swt,
     quote:
-      "Swtcryptovibe12 specializes in ensuring every user feels completely included and empowered when interacting with our platform. Through rigorous usability testing and comprehensive accessibility reviews, they maintain our human-centered design philosophy, identifying potential barriers and implementing solutions that make our technology accessible to users of all abilities and backgrounds.",
+      "Ensures every user feels included — testing usability and accessibility to keep our design human-centered.",
     highlight: "member",
     socials: {
       twitter: "https://x.com/SWTCRYPTOVIBE12?t=a3l8jzjy8Q4QNJP-n2pF1w&s=09",
@@ -41,10 +41,10 @@ const people = [
   },
   {
     name: "Dozyay",
-    role: "Senior Product Strategist & Roadmap Architect",
+    role: "Product Strategist",
     img: doz,
     quote:
-      "Dozyay excels at transforming bold, innovative ideas into actionable, workable product roadmaps. As our Product Strategist, they shape how Orange Dynasty evolves by conducting market analysis, defining product vision, and establishing clear milestones that guide our development team toward creating meaningful user experiences that resonate with our community.",
+      "Turns bold ideas into workable roadmaps. Shapes how Orange Dynasty evolves, one strategy at a time.",
     highlight: "member",
     socials: {
       twitter: "https://x.com/dozyayy",
@@ -55,10 +55,10 @@ const people = [
   },
   {
     name: "Moja",
-    role: "Lead Project Designer & Visual Experience Architect",
+    role: "Project Designer",
     img: moj,
     quote:
-      "Moja masterfully transforms abstract creativity into tangible visual experiences that captivate and engage our users. As the Project Designer, they craft the complete look, feel, and flow of our platform, ensuring every interface element, color scheme, and user interaction feels intuitive and welcoming while maintaining brand consistency across all touchpoints.",
+      "Transforms creativity into visual experience — crafting the look and flow that make users feel at home.",
     highlight: "member",
     socials: {
       twitter: "https://x.com/Defi_Moja",
@@ -69,10 +69,10 @@ const people = [
   },
   {
     name: "OneFilo Phillips",
-    role: "Customer Support Lead & Community Feedback Manager",
+    role: "Customer Support",
     img: phi,
     quote:
-      "OneFilo Phillips serves as the vital connection between our users and development team, actively listening to community feedback, providing exceptional support, and implementing improvements based on user insights. They ensure every voice within the Orange Dynasty community is heard, valued, and incorporated into our continuous improvement process.",
+      "Listens, helps, and improves. Bridges our users and developers — because every voice shapes the Dynasty.",
     highlight: "member",
     socials: {
       twitter: "https://x.com/OneFilo204?t=2HMt_MPonqouoY6WVkDrSQ&s=09",
@@ -83,10 +83,10 @@ const people = [
   },
   {
     name: "Lionel",
-    role: "Quality Assurance Lead & Comprehensive Testing Specialist",
+    role: "Quality Assurance",
     img: lio,
     quote:
-      "Lionel proactively breaks things before our users ever encounter issues, ensuring platform stability, reliability, and seamless performance across every device and browser. As our Quality Assurance lead, they design and execute comprehensive test plans, identify potential vulnerabilities, and validate that every feature meets our high standards for user experience.",
+      "Breaks things before users do — ensuring stability, reliability, and smooth experience across every device.",
     highlight: "member",
     socials: {
       twitter: "https://x.com/LionelEwuz56644?t=5RfLWp8OX9wP2NCkMWo9Xg&s=09",
@@ -97,10 +97,10 @@ const people = [
   },
   {
     name: "ReaperX",
-    role: "Lead Developer & UI/UX Design Architect",
+    role: "Lead Developer & Designer",
     img: rxx,
     quote:
-      "ReaperX brought Orange Dynasty to life from initial design concepts to fully functional Web3 experiences. As the Lead Developer and UI/UX Designer, they architect the complete visual identity, user interface logic, and seamless interaction flows that define our platform, balancing aesthetic appeal with technical excellence in every implementation.",
+      "Brought Orange Dynasty to life — from design concepts to functional Web3 experiences. The mind behind the visuals, logic, and flow.",
     highlight: "developer",
     socials: {
       twitter: "https://x.com/ReaperX771?t=Q__51z-AmvlqQeEVpYJvnA&s=09",
@@ -154,7 +154,7 @@ function Colla() {
 
     if (showImageModal) {
       document.addEventListener('keydown', handleEscKey);
-      document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+      document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -176,20 +176,20 @@ function Colla() {
     <>
       <section
         id="colla"
-        className="bg-gradient-to-r from-orange-100 via-pink-100 to-purple-100 py-20 px-6 md:px-12 overflow-x-hidden"
+        className="bg-gradient-to-r from-orange-100 via-pink-100 to-purple-100 py-12 md:py-20 px-4 md:px-12 overflow-x-hidden"
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 md:mb-8">
             Meet the <span className="text-[#fc4700]">Collaborators</span>
           </h2>
 
           {/* Card */}
           <div
             key={person.name}
-            className={`bg-white rounded-2xl shadow-lg p-8 md:p-12 transition-all duration-700 transform border-4 ${cardBorder()} mx-auto`}
+            className={`bg-white rounded-2xl shadow-lg p-6 md:p-8 transition-all duration-700 transform border-4 ${cardBorder()} mx-auto`}
           >
             <div
-              className="relative group mx-auto mb-6 w-40 h-40 cursor-pointer"
+              className="relative group mx-auto mb-4 md:mb-6 w-32 h-32 md:w-40 md:h-40 cursor-pointer"
               onClick={() => openImageModal(person.img)}
               onKeyDown={(e) => e.key === 'Enter' && openImageModal(person.img)}
               tabIndex={0}
@@ -199,10 +199,10 @@ function Colla() {
               <img
                 src={person.img}
                 alt={person.name}
-                className={`w-40 h-40 rounded-full object-cover border-4 ${cardBorder()} transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(255,140,0,0.6)]`}
+                className={`w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 ${cardBorder()} transition-transform duration-500 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(255,140,0,0.6)]`}
               />
               <div
-                className={`absolute inset-0 rounded-full bg-black bg-opacity-40 flex items-center justify-center text-white text-sm font-semibold transition-opacity ${
+                className={`absolute inset-0 rounded-full bg-black bg-opacity-40 flex items-center justify-center text-white text-xs md:text-sm font-semibold transition-opacity ${
                   showOverlay ? "opacity-100" : "opacity-0 group-hover:opacity-100"
                 }`}
               >
@@ -210,21 +210,21 @@ function Colla() {
               </div>
             </div>
 
-            <h3 className="text-2xl font-bold text-gray-900">{person.name}</h3>
-            <p className="text-lg font-semibold italic mb-6 text-gray-700 bg-gradient-to-r from-orange-50 to-pink-50 py-2 px-4 rounded-lg">
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-2">{person.name}</h3>
+            <p className="text-sm md:text-base font-semibold italic mb-4 text-gray-600">
               {person.role}
             </p>
-            <p className="leading-relaxed text-justify text-gray-800 text-lg">
+            <p className="text-gray-800 leading-relaxed text-sm md:text-base">
               {person.quote}
             </p>
 
             {/* Socials */}
-            <div className="flex justify-center gap-4 mt-8">
+            <div className="flex justify-center gap-3 md:gap-4 mt-6">
               <a
                 href={person.socials.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-blue-400 to-blue-600 p-3 rounded-full text-white text-xl transition hover:bg-white hover:text-blue-600"
+                className="bg-gradient-to-r from-blue-400 to-blue-600 p-2 md:p-3 rounded-full text-white text-lg md:text-xl transition hover:bg-white hover:text-blue-600"
               >
                 <FaTwitter />
               </a>
@@ -232,7 +232,7 @@ function Colla() {
                 href={person.socials.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-sky-400 to-sky-600 p-3 rounded-full text-white text-xl transition hover:bg-white hover:text-sky-600"
+                className="bg-gradient-to-r from-sky-400 to-sky-600 p-2 md:p-3 rounded-full text-white text-lg md:text-xl transition hover:bg-white hover:text-sky-600"
               >
                 <FaTelegram />
               </a>
@@ -240,7 +240,7 @@ function Colla() {
                 href={person.socials.discord}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-indigo-400 to-indigo-600 p-3 rounded-full text-white text-xl transition hover:bg-white hover:text-indigo-600"
+                className="bg-gradient-to-r from-indigo-400 to-indigo-600 p-2 md:p-3 rounded-full text-white text-lg md:text-xl transition hover:bg-white hover:text-indigo-600"
               >
                 <FaDiscord />
               </a>
@@ -248,7 +248,7 @@ function Colla() {
                 href={person.socials.sign}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-gradient-to-r from-orange-400 to-orange-600 p-3 rounded-full text-white text-xl transition hover:bg-white hover:text-orange-600"
+                className="bg-gradient-to-r from-orange-400 to-orange-600 p-2 md:p-3 rounded-full text-white text-lg md:text-xl transition hover:bg-white hover:text-orange-600"
               >
                 <SiSignal />
               </a>
@@ -256,23 +256,23 @@ function Colla() {
           </div>
 
           {/* Controls */}
-          <div className="flex justify-between items-center mt-8 max-w-md mx-auto">
+          <div className="flex justify-between items-center mt-6 md:mt-8 max-w-xs md:max-w-md mx-auto">
             <button
               onClick={prevSlide}
-              className="p-3 bg-orange-500 text-white rounded-full shadow-md hover:bg-orange-600 transition"
+              className="p-2 md:p-3 bg-orange-500 text-white rounded-full shadow-md hover:bg-orange-600 transition"
             >
               <FaArrowLeft />
             </button>
             <button
               onClick={nextSlide}
-              className="p-3 bg-red-600 text-white rounded-full shadow-md hover:bg-orange-600 transition"
+              className="p-2 md:p-3 bg-red-600 text-white rounded-full shadow-md hover:bg-orange-600 transition"
             >
               <FaArrowRight />
             </button>
           </div>
 
           {/* Credit */}
-          <p className="text-center mt-10 text-sm text-gray-600">
+          <p className="text-center mt-8 md:mt-10 text-xs md:text-sm text-gray-600">
             Built & Designed by <span className="font-semibold text-orange-600">ReaperX</span> ⚡
           </p>
         </div>
@@ -287,31 +287,31 @@ function Colla() {
           aria-modal="true"
           aria-label="Image preview dialog"
         >
-          <div className="relative max-w-4xl max-h-full">
+          <div className="relative max-w-4xl max-h-full w-full">
             <button
               onClick={closeImageModal}
-              className="absolute -top-12 right-0 text-white text-2xl p-2 mt-10 hover:text-orange-400 transition-colors z-10 bg-black bg-opacity-50 rounded-full"
+              className="absolute -top-10 md:-top-12 right-0 text-white text-xl md:text-2xl p-2 hover:text-orange-400 transition-colors z-10 bg-black bg-opacity-50 rounded-full"
               aria-label="Close image preview"
             >
-              <FaTimes size={24} />
+              <FaTimes size={20} className="md:w-6 md:h-6" />
             </button>
             
-            <div className="bg-white rounded-lg overflow-hidden shadow-2xl">
+            <div className="bg-white rounded-lg overflow-hidden shadow-2xl mx-2">
               <img
                 src={currentImage}
                 alt={`${person.name} - Full Preview`}
-                className="w-full h-auto max-h-[80vh] object-contain"
+                className="w-full h-auto max-h-[70vh] md:max-h-[80vh] object-contain"
               />
               
-              <div className="bg-gradient-to-r from-orange-500 to-red-600 p-4 text-white text-center">
-                <h3 className="text-xl font-bold">{person.name}</h3>
-                <p className="text-sm opacity-90">{person.role}</p>
+              <div className="bg-gradient-to-r from-orange-500 to-red-600 p-3 md:p-4 text-white text-center">
+                <h3 className="text-lg md:text-xl font-bold">{person.name}</h3>
+                <p className="text-xs md:text-sm opacity-90">{person.role}</p>
               </div>
             </div>
             
-            <div className="text-center mt-4">
-              <p className="text-white text-sm opacity-75">
-                Click outside the image, press ESC, or click the X to close
+            <div className="text-center mt-3 md:mt-4">
+              <p className="text-white text-xs md:text-sm opacity-75">
+                Click outside, press ESC, or click X to close
               </p>
             </div>
           </div>
