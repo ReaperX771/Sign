@@ -124,7 +124,7 @@ export default function Reward() {
               🎉 Special Launch Promotion! 🎉
             </p>
             <p className="text-xs sm:text-sm text-gray-700">
-              For the next <b>{Math.floor(timeLeft/3600)}h {Math.floor((timeLeft%3600)/60)}m {timeLeft%60}s</b>, you can claim your reward with just <b>50 oranges</b> instead of the usual 100.
+              For the next <b>{Math.floor(timeLeft/3600)}h {Math.floor((timeLeft%3600)/60)}m {timeLeft%60}s</b>, you can claim <b>50 oranges</b> instead of the usual 100.
             </p>
             <p className="text-xs sm:text-sm text-gray-700 mt-1">
               This limited-time offer is to celebrate the official launch of our website. Start playing now and maximize your rewards!

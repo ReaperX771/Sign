@@ -41,7 +41,7 @@ function Footer() {
             community at the core.
           </p>
         </div>
-
+        
         {/* Navigation */}
         <div>
           <h4 className="text-lg font-semibold mb-4">Explore</h4>
