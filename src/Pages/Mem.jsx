@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import dozz from '../assets/images/dozz.jpg'
-import mojj from '../assets/images/mojj.jpg'
-import fil from '../assets/images/fil.jpg'
-import swtt from '../assets/images/swtt.jpg'
-import nice from '../assets/images/nice.jpg'
+import dozz from '../assets/images/dozz.jpg';
+import mojj from '../assets/images/mojj.jpg';
+import fil from '../assets/images/fil.jpg';
+import swtt from '../assets/images/swtt.jpg';
+import nice from '../assets/images/nice.jpg';
+import { FaEnvelope, FaWhatsapp } from "react-icons/fa";
+import { BsTwitterX } from "react-icons/bs";
 
 export default function Mem() {
   const [current, setCurrent] = useState(0);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
 
   const memes = [
     {
@@ -45,20 +49,6 @@ export default function Mem() {
       xHandle: "@Az_croven",
       date: "2025-10-04",
     },
-    // {
-    //   id: 6,
-    //   image: "https://i.imgur.com/w09hH8C.jpeg",
-    //   owner: "MetaverseMax",
-    //   xHandle: "@MetaMax",
-    //   date: "2025-10-04",
-    // },
-    // {
-    //   id: 7,
-    //   image: "https://i.imgur.com/RPw9Bjd.jpeg",
-    //   owner: "Web3Guru",
-    //   xHandle: "@Web3Guru",
-    //   date: "2025-10-04",
-    // },
   ];
 
   const nextMeme = () => setCurrent((prev) => (prev + 1) % memes.length);
@@ -79,9 +69,37 @@ export default function Mem() {
 
   const meme = memes[current];
 
+  // Web3Forms handler
+  const sendForm = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.target);
+    formData.append("access_key", "fbb63ae0-0d4c-4e2d-92a5-4282967f0268");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (res.ok) {
+        setSent(true);
+        e.target.reset();
+        setTimeout(() => setSent(false), 4000);
+      } else {
+        alert("Error sending message. Please try again.");
+      }
+    } catch (error) {
+      alert("Error sending message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="min-h-screen bg-gradient-to-br py-30 from-orange-400 to-red-500 flex flex-col items-center justify-center text-white p-6">
-      <h1 className="text-4xl font-extrabold mb-6">Meme of the Day 😂</h1>
+      <h1 className="text-4xl font-extrabold mb-6">Memes of the Day 😂</h1>
 
       <div className="relative w-full max-w-md bg-white text-black rounded-2xl shadow-2xl overflow-hidden">
         <img
@@ -173,6 +191,67 @@ export default function Mem() {
           </div>
         </div>
       )}
+
+      {/* Upload Request Form */}
+      <div className="mt-20 bg-white/10 backdrop-blur-lg p-8 rounded-2xl shadow-xl w-full max-w-2xl mx-auto">
+        <h3 className="text-2xl font-bold text-white mb-6 text-center">
+          Request Meme Upload 📩
+        </h3>
+        <form onSubmit={sendForm} className="flex flex-col gap-4">
+          <input
+            type="url"
+            name="image_link"
+            placeholder="Paste image link here"
+            required
+            className="p-2 rounded-lg bg-white text-black"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email (optional)"
+            className="p-2 rounded-lg bg-white text-black"
+          />
+          <textarea
+            name="message"
+            placeholder="Message (optional)"
+            rows="3"
+            className="p-2 rounded-lg bg-white text-black"
+          ></textarea>
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-4 py-3 px-6 bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transition-transform flex justify-center items-center"
+          >
+            {loading ? (
+              <span className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full"></span>
+            ) : (
+              "Send Request"
+            )}
+          </button>
+        </form>
+        {sent && (
+          <p className="mt-4 text-green-200 text-center">
+            ✅ Your request has been sent successfully!
+          </p>
+        )}
+
+        {/* Direct Contact */}
+        <p className="text-sm text-white/70 mt-4 text-center">
+          Already have the image? Send it directly via Email, WhatsApp, or X.
+        </p>
+        <div className="mt-2 flex justify-center gap-6 text-white text-2xl">
+          <a href="mailto:control0177@gmail.com" className="hover:text-yellow-200">
+            <FaEnvelope />
+          </a>
+          <a href="https://wa.me/qr/7A4U35SCTPLLK1" target="_blank" rel="noreferrer" className="hover:text-yellow-200">
+            <FaWhatsapp />
+          </a>
+          <a href="https://x.com/ReaperX771?t=2KfJeNsrbE5G54frMSaVuA&s=09" target="_blank" rel="noreferrer" className="hover:text-yellow-200">
+            <BsTwitterX />
+          </a>
+        </div>
+        
+      </div>
     </section>
   );
 }

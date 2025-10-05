@@ -5,7 +5,7 @@ import { SiSignal } from "react-icons/si";
 import nige from "../assets/images/nige.jfif";
 import swt from "../assets/images/swt.jpg";
 import moj from "../assets/images/moj.jpg";
-import rxx from "../assets/images/rxx.png";
+import rxxx from "../assets/images/rxxx.png";
 import phi from "../assets/images/phi.jpg";
 import doz from "../assets/images/doz.jpg";
 import lio from "../assets/images/lioo.jpg";
@@ -98,7 +98,7 @@ const people = [
   {
     name: "ReaperX",
     role: "Lead Developer & UI/UX Designer",
-    img: rxx,
+    img: rxxx,
     quote:
       "Brought Orange Dynasty to life — from design concepts to functional Web3 experiences. The mind behind the visuals, logic, and flow.",
     highlight: "developer",
@@ -290,7 +290,7 @@ function Colla() {
           <div className="relative max-w-4xl max-h-full w-full">
             <button
               onClick={closeImageModal}
-              className="absolute -top-10 md:-top-12 right-0 text-white text-xl md:text-2xl p-2 hover:text-orange-400 transition-colors z-10 bg-black bg-opacity-50 rounded-full"
+              className="absolute -top-10 md:-top-12 right-0 text-white text-xl md:text-2xl p-2 mt-10 hover:text-orange-400 transition-colors z-10 bg-black bg-opacity-50 rounded-full"
               aria-label="Close image preview"
             >
               <FaTimes size={20} className="md:w-6 md:h-6" />

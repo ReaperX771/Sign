@@ -5,6 +5,7 @@ import { BsTwitterX } from "react-icons/bs";
 import logo from "../assets/images/logo.svg";
 import { Link } from "react-router-dom";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import rxr from '../assets/images/rxt.png'
 
 function Footer() {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ function Footer() {
         
         {/* Navigation */}
         <div>
-          <h4 className="text-lg font-semibold mb-4">Explore</h4>
+          <h4 className="text-lg font-semibold mb-4 border-b-2 border-[#FF6600] w-14">Explore</h4>
           <ul className="space-y-2 text-gray-300 text-sm">
             <li><button onClick={() => handleAnchorNav("#what")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">About</button></li>
             <li><button onClick={() => handleAnchorNav("#how")} className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">How it Works</button></li>
@@ -56,7 +57,7 @@ function Footer() {
 
         {/* Support */}
         <div>
-          <h4 className="text-lg font-semibold mb-4">Support</h4>
+          <h4 className="text-lg font-semibold mb-4 border-b-2 border-[#FF6600] w-14">Support</h4>
           <ul className="space-y-2 text-gray-300 text-sm">
             <li><Link to="/ask" className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">Ask a Question</Link></li>
             <li><Link to="/doc"  className="hover:text-orange-400 transition bg-transparent border-none p-0 m-0 text-inherit cursor-pointer">Documentation</Link></li>
@@ -67,7 +68,7 @@ function Footer() {
 
         {/* Socials */}
         <div>
-          <h4 className="text-lg font-semibold mb-4">Connect</h4>
+          <h4 className="text-lg font-semibold mb-4 border-b-2 border-[#FF6600] w-14">Connect</h4>
           <div className="flex space-x-5 text-2xl">
             <a
               href="https://wa.me/qr/7A4U35SCTPLLK1"
@@ -96,8 +97,10 @@ function Footer() {
       </div>
 
       {/* Bottom Line */}
-      <div className="w-[90%] m-auto mt-10 border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
-        © {new Date().getFullYear()} Orange Dynasty. All Rights Reserved.
+      <div className="w-[90%] m-auto mt-10  border-t border-gray-700 pt-6 text-center text-gray-400 text-sm">
+        <p> © {new Date().getFullYear()} Orange Dynasty. All Rights Reserved.</p>
+       
+       
       </div>
     </footer>
   );

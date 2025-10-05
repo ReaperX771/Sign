@@ -190,7 +190,10 @@ function Gallery() {
           )}
 
           {/* Direct Contact */}
-          <div className="mt-6 flex justify-center gap-6 text-white text-2xl">
+           <p className="text-sm text-white/70 mt-6 text-center">
+            Already have the image? Send it directly via Email, WhatsApp, or X.
+          </p>
+          <div className="mt-2 flex justify-center gap-6 text-white text-2xl">
             <a href="mailto:control0177.gmail.com" className="hover:text-yellow-200">
               <FaEnvelope />
             </a>
@@ -201,9 +204,7 @@ function Gallery() {
               <BsTwitterX />
             </a>
           </div>
-          <p className="text-sm text-white/70 mt-2 text-center">
-            Already have the image? Send it directly via Email, WhatsApp, or X.
-          </p>
+         
         </div>
       </div>
     </section>
