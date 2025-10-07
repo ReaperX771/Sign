@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight, FaTwitter, FaDiscord, FaTelegram, FaTimes } from "react-icons/fa";
 import { SiSignal } from "react-icons/si";
 
-import nige from "../assets/images/nige.jfif";
+import nic from "../assets/images/nic.png";
 import swt from "../assets/images/swt.jpg";
 import moj from "../assets/images/moj.jpg";
 import rxxx from "../assets/images/rxxx.png";
@@ -14,7 +14,7 @@ const people = [
   {
     name: "NiceGuy",
     role: "Project Coordinator",
-    img: nige,
+    img: nic,
     quote:
       "Keeps the Orange Dynasty vision aligned and the team on track. The bridge between creativity and execution.",
     highlight: "leader",
